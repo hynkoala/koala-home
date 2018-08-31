@@ -1,0 +1,47 @@
+<script language="javascript" src="/koala-home/static/js/getUserInfo.js"></script>
+
+<script>
+    window.onload=function(){
+        var user = eval(${user});
+        var test = '${list.username}';
+        document.getElementById("test").innerHTML=test;
+    }
+</script>
+
+
+<script>
+        window.onload=function(){
+            var username='${user.username}';
+            var usertruename = '${user.userTrueName}';
+            var email = '${user.userEmail}'
+            var phone = '${user.userPhone}'
+            var sex = '${user.userSex}'
+            var age = '${user.userAge}'
+            document.getElementById("username").value=username;
+            document.getElementById("user-true-name").value=usertruename;
+            document.getElementById("email").value=email;
+            document.getElementById("phone").value=phone;
+            document.getElementById("sex").value=sex;
+            document.getElementById("age").value=age;
+        }
+    </script>
+
+    <script>
+            function getUserInfo() {
+                var datas = '{"username":"' + $('#username').val() + '","email":"' + $('#userEmail').val() + '","age":"' + $('#userAge').val() + '"}';
+                $.ajax({
+                    type : 'POST',
+                    contentType : 'application/json',
+                    url : "${pageContext.request.contextPath}/user/getUserInfo",
+                    processData : false,
+                    dataType : 'json',
+                    data : datas,
+                    success : function(data) {
+                        alert("username: " + data.username + "email: " + data.userEmail + "age: "+ data.userAge);
+                    },
+                    error : function(XMLHttpRequest, textStatus, errorThrown) {
+                        alert("出现异常，异常信息："+textStatus,"error");
+                    }
+                })
+            }
+        </script>

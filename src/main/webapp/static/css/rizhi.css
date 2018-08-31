@@ -1,0 +1,57 @@
+/* CSS Document */
+
+#rizhi_content{
+	width:1024px;
+	height:768px;
+	position:relative;
+	margin-top:8px;
+	margin:0 auto;
+	border:1px solid rgb(36,66,92); 
+}
+
+h3.biaoti{
+	width: 100px;
+	height: 30px;
+	color: #FF0;
+	background: rgb(36,66,92);
+	text-align: center;
+	line-height: 30px;
+	margin-top:10px;
+}
+
+.show_rizhi_title{
+	width: 60%;
+	height: 469px;
+	border: 5px solid blue;
+	position: absolute;
+}
+.show_rizhi_title table{
+	color:darkblue;
+	width:100%;
+	table-layout: fixed;
+}
+.show_rizhi_title tr{
+	
+	
+}
+.show_rizhi_title lable{
+	color:black;
+	font-size:24px;
+	font-family:"黑体";	
+}
+
+.rizhi_title{
+	
+	
+	width:90%;
+	display:block;
+	
+	
+	
+}
+
+.rizhi_date{
+	
+	
+	float:right;	
+}

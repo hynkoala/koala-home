@@ -1,0 +1,72 @@
+﻿/* CSS Document */
+@charset "utf-8";
+/* CSS Document */
+#header {
+	background: url("../img/header.jpg");
+}
+#welcome{
+
+	width:1024px;
+	height:768px;
+	position:relative;
+	margin-top:8px;
+	margin:0 auto;
+	border:1px solid rgb(36,66,92); 
+	
+}
+#content{
+	/*background-image: url(../img/welcome.jpg)*/
+	background-repeat:no-repeat;
+	width: 100%;
+	position: absolute;
+	height: 481px;
+	top: 233px;
+	
+}
+
+
+
+#dongtai{
+	position: absolute;
+	top: 422px;
+	width: 592px;
+	height: 290px;
+	border:rgb(36,66,92) 1px solid;
+}
+
+img.welcome{
+	display: block;
+	position: absolute;
+	left: 725px;
+	top: 67px;
+	height: 416px;
+	width: 297px;
+}
+
+
+ h3.biaoti{
+	width: 100px;
+	height: 30px;
+	color: #FF0;
+	background: rgb(36,66,92);
+	text-align: center;
+	line-height: 30px;
+	margin-top:10px;
+
+
+	
+}
+	
+ul{
+	display:block;
+	top:100px;
+	line-height:30px;
+	color:rgb(36,66,96);
+	font-size:18px;
+	left:20px;
+}
+li{
+	display:block;
+	left:20px;
+	margin-left:15px;
+}

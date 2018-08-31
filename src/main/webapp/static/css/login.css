@@ -1,0 +1,47 @@
+/* CSS Document */
+@charset "utf-8";
+body{
+    padding-top:13%;
+}
+.out-box{
+    position: relative;
+    font-size:20px;
+    background-color: rgb(240,240,240);
+    width:360px;
+    height:200px;
+    margin:0 auto;
+    border:1px solid greenyellow;
+    padding-top:50px;
+    padding-left:40px;
+}
+input.login-input{
+    width:200px;
+    height:30px;
+    border:1px solid deepskyblue;
+    margin-left:0px;
+    margin-top:20px;
+    float:left;
+
+}
+span.login-item{
+    width:100px;
+    height:30px;
+    float:left;
+    margin-top:20px;
+}
+.login-submit{
+    position:absolute;
+    top:140px;
+    left:-15px;
+    right:0px;
+
+}
+button#submit{
+    margin-right:40px;
+    font-size:16px;
+
+}
+a{
+    font-size:16px;
+}
+
