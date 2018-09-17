@@ -19,9 +19,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
 
-//import org.apache.commons.lang3.StringUtils;
-;
-
 /**
  * Created by hanyaning
  * Email:hynkoala@163.com
@@ -59,6 +56,14 @@ public class UserController {
 
     }
 
+    /**
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.09.17
+     * @Param: [user, attr]
+     * @Return:
+     * @Description: 用户登录
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, RedirectAttributes attr) {
         String mappingMark = "login";
@@ -71,7 +76,6 @@ public class UserController {
                 attr.addAttribute("username", user.getUserName());
                 return "redirect:/user/toHome";
             } else {
-
                 attr.addAttribute("checkInfo", checkInfo);
                 return "redirect:/user/error";
             }
@@ -80,7 +84,14 @@ public class UserController {
         return "redirect:/user/error";
     }
 
-
+    /**
+     *@Author: hanyaning
+     *@Email: hynkoala@163.com
+     *@Date: 2018.09.17
+     *@Param: [checkInfo, mappingMark, map]
+     *@Return:
+     *@Description: 错误信息反馈
+     */
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String loginAndRegisterError(@RequestParam String checkInfo,
                                         @RequestParam String mappingMark,
@@ -94,6 +105,14 @@ public class UserController {
         return "error";
     }
 
+    /**
+     *@Author: hanyaning
+     *@Email: hynkoala@163.com
+     *@Date: 2018.09.17
+     *@Param: [username, map]
+     *@Return:
+     *@Description: 返回主页
+     */
     @RequestMapping(value = "/toHome")
     public String loginHomepage(@RequestParam String username, ModelMap map) {
         if(StringUtils.isBlank(username)){
@@ -174,7 +193,6 @@ public class UserController {
             }else{
                 json.fluentPut("errorInfo", "请先登录！");
             }
-
         return user;
 
     }

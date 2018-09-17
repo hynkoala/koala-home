@@ -1,7 +1,7 @@
 package cn.koala.home.mapper;
 
 import cn.koala.home.model.User;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by user
@@ -10,19 +10,35 @@ import org.springframework.stereotype.Repository;
  * Time:17:02
  * Description:
  */
-@Repository
+@Component
 public interface UserMapper {
-
+    /**
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.09.17
+     * @Param: [user]
+     * @Return: void
+     * @Description: 插入用户操作
+     */
     void insertUser(User user);
 
     /**
-     * @Author:Hanyaning
-     * @Email:hynkoala@163.com
-     * @Date:2018.07.20
-     * @Param:[username]
-     * @Return:
+     *@Author: hanyaning
+     *@Email: hynkoala@163.com
+     *@Date: 2018.09.17
+     *@Param: [username]
+     *@Return: cn.koala.home.model.User
+     *@Description: 通过用户名查询用户操作
      */
     User queryUserByUserName(String username);
 
+    /**
+     *@Author: hanyaning
+     *@Email: hynkoala@163.com
+     *@Date: 2018.09.17
+     *@Param: [user]
+     *@Return: void
+     *@Description: 通过user对象更新用户错作
+     */
     void updateUser(User user);
 }
