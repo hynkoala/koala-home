@@ -64,6 +64,7 @@ public class UserController {
      * @Return:
      * @Description: 用户登录
      */
+    @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user, RedirectAttributes attr) {
         String mappingMark = "login";
@@ -72,16 +73,8 @@ public class UserController {
         if (LoginAndRegister.PASS_CHECK.equals(checkInfo)) {
             User user1 = userMapper.queryUserByUserName(user.getUserName());
             checkInfo = userService.checkLoginInfo(user, mappingMark, user1);
-            if (checkInfo == LoginAndRegister.PASS_CHECK) {
-                attr.addAttribute("username", user.getUserName());
-                return "redirect:/user/toHome";
-            } else {
-                attr.addAttribute("checkInfo", checkInfo);
-                return "redirect:/user/error";
-            }
         }
-        attr.addAttribute("checkInfo", checkInfo);
-        return "redirect:/user/error";
+        return checkInfo;
     }
 
     /**
@@ -170,14 +163,6 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/getUserInfo")
-
-    /*public String getUserInfo(@RequestParam String username) {
-        List<User> list = new ArrayList();
-        list = userMapper.queryUserByUserName(username);
-        User user = (User)list.get(0);
-        return username; a
-
-    }*/
     public User getUserInfo(@RequestParam String username) {
         JSONObject json = new JSONObject();
         User user = new User();

@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/footer.css" />
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/homepage.css"/>
     <link rel="icon" href="/koala-home/static/img/ico.ico'/>"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
 
     <script>
         function getUsername(){

@@ -31,12 +31,13 @@ span.login-item{
 }
 .login-submit{
     position:absolute;
-    top:140px;
+    top: 160px;
     left:-15px;
     right:0px;
 
 }
-button#submit{
+
+button#submit-login {
     margin-right:40px;
     font-size:16px;
 
