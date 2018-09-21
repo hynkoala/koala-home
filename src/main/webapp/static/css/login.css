@@ -29,20 +29,33 @@ span.login-item{
     float:left;
     margin-top:20px;
 }
-.login-submit{
-    position:absolute;
-    top: 160px;
-    left:-15px;
-    right:0px;
 
+.login-buttons {
+    position:absolute;
+    top: 180px;
+    right:0px;
 }
 
+button {
+    font-size: 16px;
+    padding: 4px 4px;
+}
 button#submit-login {
     margin-right:40px;
-    font-size:16px;
-
+    margin-left: 40px;
 }
 a{
     font-size:16px;
+}
+
+#warn-info {
+    text-align: center;
+    width: 400px;
+    border: 0;
+    background-color: rgb(240, 240, 240);
+    font-size: 14px;
+    color: dodgerblue;
+    padding-left: 6%;
+    margin-top: 16px;
 }
 

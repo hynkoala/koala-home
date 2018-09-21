@@ -16,15 +16,19 @@
                 success: function (data) {
                     if (data == "验证通过！") {
                         window.location.href = "/koala-home/user/toHome?username=" + username;
+                        $("#warn-info").val("loading...");
                     } else {
-                        alert(data);
+                        $("#warn-info").val(data);
                     }
 
                 },
                 error: function () {
-                    alert("发生未知错误！");
+                    $("#warn-info").val("发生未知错误！");
                 }
             })
+        }
+        function toRegister() {
+            window.open("/koala-home/view/register.ftl");
         }
     </script>
 </head>
@@ -35,9 +39,12 @@
     <input class="login-input" name="userName" type="text" id="user-name"></input>
     <span class="login-item">密码：</span>
     <input class="login-input" name="userPassword" type="password" id="password"></input>
-    <div class="login-submit">
+    <div class="login-buttons">
         <button id="submit-login" onclick="checkUser()">登陆</button>
-        <a href="/koala-home/view/register.ftl">注册</a>
+        <button id="to-register" onclick="toRegister()">注册</button>
+        <div id="warm-info-area">
+            <input id="warn-info" readonly unselectable="on"></input>
+        </div>
     </div>
 
 

@@ -4,7 +4,6 @@ import cn.koala.home.constant.LoginAndRegister;
 import cn.koala.home.mapper.UserMapper;
 import cn.koala.home.model.User;
 import cn.koala.home.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,27 +45,16 @@ public class UserServiceImpl implements UserService {
      * @Description:用户登录验证
      */
     @Override
-    public String checkLoginInfo(User user, String mappingMark, User user1) {
+    public String checkPassword(User user, String mappingMark, User localUser) {
         String checkInfo = "";
-        String username = user.getUserName();
         String userPassword = user.getUserPassword();
-        if (StringUtils.isNotBlank(user1.getUserName())) {
-            if (user1.getUserPassword().equals(userPassword)) {
-                //验证成功
-                checkInfo = LoginAndRegister.PASS_CHECK;
-                return checkInfo;
-            } else {
-                // 密码不正确
-                checkInfo = LoginAndRegister.PASSWORD_ERROR;
-                return checkInfo;
-            }
+        if (localUser.getUserPassword().equals(userPassword)) {
+            checkInfo = LoginAndRegister.PASS_CHECK;
+        } else {
+            checkInfo = LoginAndRegister.PASSWORD_ERROR;
         }
-        checkInfo = LoginAndRegister.NO_SUCH_USER_NAME;
         return checkInfo;
-
-
     }
-
 
     /**
      * @Author: hanyaning

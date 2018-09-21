@@ -66,24 +66,32 @@ public class UserController {
      */
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String login(User user, RedirectAttributes attr) {
+    public String login(User user) {
         String mappingMark = "login";
-        attr.addAttribute("mappingMark", mappingMark);
-        String checkInfo = userService.checkInputIsNotNull(user, mappingMark);
+        String checkInfo = "";
+        if (StringUtils.isNotBlank(user.getUserName())) {
+            checkInfo = userService.checkUsernameIsExist(user, mappingMark);
+            if (!StringUtils.equals(checkInfo, LoginAndRegister.USERNAME_EXIST)) {
+                return LoginAndRegister.NO_SUCH_USER_NAME;
+            }
+        } else {
+            return LoginAndRegister.USERNAME_NOT_EXIST;
+        }
+        checkInfo = userService.checkInputIsNotNull(user, mappingMark);
         if (LoginAndRegister.PASS_CHECK.equals(checkInfo)) {
-            User user1 = userMapper.queryUserByUserName(user.getUserName());
-            checkInfo = userService.checkLoginInfo(user, mappingMark, user1);
+            User localUser = userMapper.queryUserByUserName(user.getUserName());
+            checkInfo = userService.checkPassword(user, mappingMark, localUser);
         }
         return checkInfo;
     }
 
     /**
-     *@Author: hanyaning
-     *@Email: hynkoala@163.com
-     *@Date: 2018.09.17
-     *@Param: [checkInfo, mappingMark, map]
-     *@Return:
-     *@Description: 错误信息反馈
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.09.17
+     * @Param: [checkInfo, mappingMark, map]
+     * @Return:
+     * @Description: 错误信息反馈
      */
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public String loginAndRegisterError(@RequestParam String checkInfo,
@@ -99,32 +107,33 @@ public class UserController {
     }
 
     /**
-     *@Author: hanyaning
-     *@Email: hynkoala@163.com
-     *@Date: 2018.09.17
-     *@Param: [username, map]
-     *@Return:
-     *@Description: 返回主页
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.09.17
+     * @Param: [username, map]
+     * @Return:
+     * @Description: 返回主页
      */
     @RequestMapping(value = "/toHome")
     public String loginHomepage(@RequestParam String username, ModelMap map) {
-        if(StringUtils.isBlank(username)){
+        if (StringUtils.isBlank(username)) {
             username = "guest";
             User user = new User();
             user.setUserName("guest");
             map.addAttribute("list", user);
-        }else{
+        } else {
             User user = userMapper.queryUserByUserName(username);
             map.addAttribute("list", user);
         }
 
         return "home";
     }
+
     /**
-     *@Author: hanyaning
-     *@Email: hynkoala@163.com
-     *@Date: 2018.08.23
-     *@Description: 从前台获取用户输入信息更新用户，并重定向到toMyspace的mapping
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.08.23
+     * @Description: 从前台获取用户输入信息更新用户，并重定向到toMyspace的mapping
      */
 
     @RequestMapping(value = "/alterUserInfo", method = RequestMethod.POST)
@@ -133,15 +142,15 @@ public class UserController {
         String username = user.getUserName();
         userMapper.updateUser(user);
         //User newUser = userMapper.queryUserByUserName(username);
-        attr.addAttribute("username",user.getUserName());
+        attr.addAttribute("username", user.getUserName());
         return "redirect:/user/toMyspace";
     }
 
     /**
-     *@Author: hanyaning
-     *@Email: hynkoala@163.com
-     *@Date: 2018.08.23
-     *@Description: 通过用户名查到所有用户信息传到前台myspace.ftl页面，返回值类型转为json
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.08.23
+     * @Description: 通过用户名查到所有用户信息传到前台myspace.ftl页面，返回值类型转为json
      */
     @RequestMapping(value = "/toMyspace")
     public ModelAndView toMyspace(@RequestParam String username) {
@@ -167,17 +176,17 @@ public class UserController {
         JSONObject json = new JSONObject();
         User user = new User();
 
-            if(StringUtils.isNotBlank(username)) {
+        if (StringUtils.isNotBlank(username)) {
 
-                user = userMapper.queryUserByUserName(username);
-                //1、使用JSONObject
-                String jsonstr = JSON.toJSONString(user);
-                json = JSON.parseObject(jsonstr);
-                //2、使用JSONArray
-                //JSONArray array = JSONArray.fromObject(user);
-            }else{
-                json.fluentPut("errorInfo", "请先登录！");
-            }
+            user = userMapper.queryUserByUserName(username);
+            //1、使用JSONObject
+            String jsonstr = JSON.toJSONString(user);
+            json = JSON.parseObject(jsonstr);
+            //2、使用JSONArray
+            //JSONArray array = JSONArray.fromObject(user);
+        } else {
+            json.fluentPut("errorInfo", "请先登录！");
+        }
         return user;
 
     }

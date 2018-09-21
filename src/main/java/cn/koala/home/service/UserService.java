@@ -28,7 +28,7 @@ public interface UserService {
      *@return: java.lang.String
      *@Description:
      */
-    String checkLoginInfo(User user, String mappingMark, User user1);
+    String checkPassword(User user, String mappingMark, User user1);
 
     /**
      *@Author: hanyaning
