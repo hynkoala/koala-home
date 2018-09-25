@@ -1,14 +1,12 @@
 ﻿@charset "utf-8";
 /* CSS Document */
 #welcome{
-
 	width:1024px;
 	height:768px;
 	position:relative;
 	margin-top:8px;
 	margin:0 auto;
-	border:1px solid rgb(36,66,92); 
-	
+	border: 1px solid rgb(36, 66, 92);
 }
 #content{
 	background-image: url("../img/welcome.jpg");
@@ -17,9 +15,7 @@
 	position: absolute;
 	height: 481px;
 	top: 233px;
-	
 }
-
 img.welcome{
 	display: block;
 	position: absolute;

@@ -133,8 +133,8 @@
                 <button class="btn btn-default" onclick="alterUserInfo()">更新信息</button>
                 <button class="btn btn-default" onclick="refreshWindow()">重置</button>
             </form>
+        </div>
     </div>
-</div>
     <jsp:include page="alluse/footer.jsp"></jsp:include>
 </div>
 

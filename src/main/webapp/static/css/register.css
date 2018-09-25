@@ -6,41 +6,35 @@ body{
 .out-box{
     font-size:20px;
     background-color: rgb(240,240,240);
-    width:360px;
+    width: 500px;
     height:330px;
     margin:0 auto;
     border:1px solid greenyellow;
     position:relative;
-    padding-top:50px;
-    padding-left:40px;
-}
-input.register-input{
-    width:200px;
-    height:30px;
-    border:1px solid deepskyblue;
-    margin-left:0px;
-    margin-top:20px;
-    float:left;
-
-}
-span.register-item{
-    width:100px;
-    height:30px;
-    float:left;
-    margin-top:20px;
-}
-.register-submit{
-    position:absolute;
-    top:240px;
-    left:-10px;
-    right:0;
-}
-button.register-button{
-    margin-right:20px;
-    font-size:16px;
-
-}
-a{
-    font-size:16px;
+    padding-top: 10px;
 }
 
+#warn-info {
+    text-align: center;
+    width: 400px;
+    border: 0;
+    background-color: rgb(240, 240, 240);
+    font-size: 14px;
+    color: dodgerblue;
+    padding-left: 6%;
+    margin-top: 16px;
+}
+
+.form-group {
+    margin-top: 20px;
+    float: left;
+    width: 100%;
+}
+
+.btn-group {
+    margin-top: 20px;
+}
+
+.form-group .form-control {
+    width: 50%;
+}

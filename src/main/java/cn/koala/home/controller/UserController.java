@@ -34,26 +34,21 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(User user, RedirectAttributes attr) {
         String mappingMark = "register";
-        attr.addAttribute("mappingMark", mappingMark);
+        String checkInfo = null;
         String checkUserNameInfo = userService.checkUsernameIsExist(user, mappingMark);
         if (LoginAndRegister.NO_SUCH_USER_NAME.equals(checkUserNameInfo)) {
-            String checkInfo = userService.checkInputIsNotNull(user, mappingMark);
+            checkInfo = userService.checkInputIsNotNull(user, mappingMark);
             if (LoginAndRegister.PASS_CHECK.equals(checkInfo)) {
                 userService.insertUser(user);
-                return "home";
-            } else {
-                attr.addAttribute("checkInfo", checkInfo);
-                return "redirect:/user/error";
             }
-
         } else {
-            attr.addAttribute("checkInfo", checkUserNameInfo);
-            return "redirect:/user/error";
+            checkInfo = LoginAndRegister.USERNAME_EXIST;
         }
-
+        return checkInfo;
     }
 
     /**
