@@ -36,6 +36,7 @@
                 </li>
                 <li width="50"><a href="/koala-home/view/html/jianli.html" title="我的简历" target="new">我的简历</a></li>
                 <li width="50"><a id="to-myspace" title="个人中心" target="_self">欢迎您：<span id="user-name"></span></a></li>
+                <li width="20" id="register-li"><a id="register-a" href="#" onclick="toRegister()">注册</a></li>
             </ul>
         </div>
     </div>

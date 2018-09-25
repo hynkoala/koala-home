@@ -22,36 +22,18 @@
 	padding-left: 50px;
 }
 
-#anniu {
-	border:#FF0;
-	color:#FF0;
-	font-family:"黑体";
-	font-size:18px;
-}
-
-ul {
-	display: block;
-	top: 100px;
-	line-height: 30px;
-	color: rgb(36, 66, 96);
-	font-size: 18px;
-	left: 20px;
-}
-
 #anniu li {
-	display: block;
-	left: 20px;
-	margin-left: 15px;
+	margin-left: 18px;
 	float: left;
 }
 .showtime{
 	bottom:35px;
 	position:absolute;
-	color:yellow;
+	color: rgb(230, 230, 230);
 	left:10px;
 }
 a{
-	color: #FF0;
+	color: #e5e5e7;
 	font-family: "黑体";
 	font-size:18px;
 	
@@ -70,3 +52,12 @@ a{
  a:active {
 	text-decoration: none;
  }
+
+a#register-a {
+	font-size: 12px;
+}
+
+li#register-li {
+	float: right;
+	margin-top: 2px;
+}

@@ -3,9 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>登录</title>
-    <link rel="stylesheet" type="text/css" href="/koala-home/static/css/reStyle.css"/>
+    <jsp:include page="alluse/autoImport.jsp"/>
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/login.css"/>
-    <script src="/koala-home/static/js/cite/jQuery.js"></script>
     <script>
         function checkUser() {
             var username = $("#user-name").val();
@@ -28,23 +27,20 @@
                 }
             })
         }
-        function toRegister() {
-            window.open("/koala-home/view/register.ftl");
-        }
     </script>
 </head>
 <body>
 <div class="out-box">
 
     <span class="login-item">用户名：</span>
-    <input class="login-input" name="userName" type="text" id="user-name"></input>
+    <input class="login-input" name="userName" type="text" id="user-name">
     <span class="login-item">密码：</span>
-    <input class="login-input" name="userPassword" type="password" id="password"></input>
+    <input class="login-input" name="userPassword" type="password" id="password">
     <div class="login-buttons">
         <button id="submit-login" onclick="checkUser()">登陆</button>
         <button id="to-register" onclick="toRegister()">注册</button>
         <div id="warm-info-area">
-            <input id="warn-info" readonly unselectable="on"></input>
+            <input id="warn-info" readonly unselectable="on"/>
         </div>
     </div>
 

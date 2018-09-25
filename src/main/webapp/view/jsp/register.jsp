@@ -20,7 +20,7 @@
             <div class="register-submit">
                 <button class="register-button" type="submit" id="submit">确定</button>
                 <button class="register-button" type="reset" id="reset">重置</button>
-                <a class="register-button" href="/koala-home/view/login.jsp">返回登陆</a>
+                <a class="register-button" href="/koala-home/view/jsp/login.jsp">返回登陆</a>
             </div>
 
         </form>
