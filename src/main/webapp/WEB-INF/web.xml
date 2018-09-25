@@ -75,8 +75,8 @@
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>view/login.ftl</welcome-file>
-        <welcome-file>view/register.ftl</welcome-file>
+        <welcome-file>view/jsp/login.jsp</welcome-file>
+        <welcome-file>view/jsp/register.jsp</welcome-file>
     </welcome-file-list>
 
 </web-app>

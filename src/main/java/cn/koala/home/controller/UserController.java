@@ -155,7 +155,7 @@ public class UserController {
     @RequestMapping(value = "/toMyspace")
     public ModelAndView toMyspace(@RequestParam String username) {
         ModelAndView userModel = new ModelAndView();
-        userModel.setViewName("ftl/myspace");
+        userModel.setViewName("myspace");
 
         /*JSONObject json = new JSONObject();
         if (username != null && username != "" && !"guest".equals(username)) {
