@@ -1,7 +1,7 @@
 /* CSS Document */
 @charset "utf-8";
 body{
-    padding-top:8%;
+    padding-top: 10%;
 }
 .out-box{
     font-size:20px;
@@ -11,7 +11,7 @@ body{
     margin:0 auto;
     border:1px solid greenyellow;
     position:relative;
-    padding-top: 10px;
+    padding-top: 16px;
 }
 
 #warn-info {

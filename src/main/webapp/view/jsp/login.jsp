@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
+<%@ page language="java" pageEncoding="utf-8" %>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -31,20 +31,23 @@
 </head>
 <body>
 <div class="out-box">
-
-    <span class="login-item">用户名：</span>
-    <input class="login-input" name="userName" type="text" id="user-name">
-    <span class="login-item">密码：</span>
-    <input class="login-input" name="userPassword" type="password" id="password">
-    <div class="login-buttons">
-        <button id="submit-login" onclick="checkUser()">登陆</button>
-        <button id="to-register" onclick="toRegister()">注册</button>
-        <div id="warm-info-area">
-            <input id="warn-info" readonly unselectable="on"/>
+    <form role="form" class="form-inline" method="post">
+        <div class="form-group">
+            <label class="label" for="user-name">用户名：</label>
+            <input class="form-control" type="text" id="user-name"/>
         </div>
+        <div class="form-group">
+            <label class="label" for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
+            <input class="form-control" type="text" id="password" type="password"/>
+        </div>
+    </form>
+    <div class="btn-group">
+        <button id="submit-login" onclick="checkUser()" class="btn btn-default">登陆</button>
+        <button id="to-register" onclick="toRegister()" class="btn btn-default">注册</button>
     </div>
-
-
+    <div id="warm-info-area">
+        <input id="warn-info" readonly unselectable="on"/>
+    </div>
 </div>
 
 

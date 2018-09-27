@@ -303,12 +303,11 @@
                     <version>9.2.1.v20140609</version>
                     <configuration>
                         <httpConnector>
-                            <port>8080</port>
+                            <port>8089</port>
                         </httpConnector>
                         <webAppConfig>
                             <contextPath>/koala-home</contextPath>
                         </webAppConfig>
-
                         <scanIntervalSeconds>0</scanIntervalSeconds>
                         <webAppSourceDirectory>webapp</webAppSourceDirectory>
                     </configuration>
