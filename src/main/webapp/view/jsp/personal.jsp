@@ -42,7 +42,7 @@
             function state_Change() {
                 if (xmlhttp.readyState == 4) {// 4 = "loaded"
                     if (xmlhttp.status == 200) {// 200 = "OK"
-                        var str = xmlhttp.responseText;
+                        var str = xmlhttp.responseText[0];
                         //var json = str.parseJSON();
                         json = eval('(' + str + ')');
                         putdata(json);
@@ -94,6 +94,11 @@
         function refreshWindow() {
             window.location.reload();
         }
+        function alterPassword() {
+            var url = "alterPassword.jsp";
+            var title = "修改密码";
+            window.open(url, title, 'width:800;heigth:600');
+        }
     </script>
 </head>
 <body>
@@ -132,6 +137,7 @@
                 </div>
                 <button class="btn btn-default" onclick="alterUserInfo()">更新信息</button>
                 <button class="btn btn-default" onclick="refreshWindow()">重置</button>
+                <button class="btn btn-default" onclick="alterPassword()">修改密码</button>
             </form>
         </div>
     </div>

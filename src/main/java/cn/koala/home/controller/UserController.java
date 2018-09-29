@@ -1,11 +1,10 @@
 package cn.koala.home.controller;
 
-import cn.koala.home.constant.LoginAndRegister;
+import cn.koala.home.constant.ConstantUser;
 import cn.koala.home.mapper.UserMapper;
 import cn.koala.home.model.User;
 import cn.koala.home.service.UserService;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by hanyaning
@@ -34,19 +34,23 @@ public class UserController {
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.09.29
+     * @Param: [user]
+     * @Return: java.lang.String
+     * @Description: 用户注册
+     */
     @ResponseBody
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String register(User user, RedirectAttributes attr) {
-        String mappingMark = "register";
-        String checkInfo = null;
-        String checkUserNameInfo = userService.checkUsernameIsExist(user, mappingMark);
-        if (LoginAndRegister.NO_SUCH_USER_NAME.equals(checkUserNameInfo)) {
-            checkInfo = userService.checkInputIsNotNull(user, mappingMark);
-            if (LoginAndRegister.PASS_CHECK.equals(checkInfo)) {
-                userService.insertUser(user);
-            }
-        } else {
-            checkInfo = LoginAndRegister.USERNAME_EXIST;
+    public String register(User user) {
+        String mappingMark = ConstantUser.MAPPING_REGISTER;
+        Map<Object, Object> inputMap = new HashMap();
+        inputMap.put("user", user);
+        String checkInfo = userService.checkInputData(inputMap, mappingMark);
+        if (checkInfo == ConstantUser.PASS_CHECK) {
+            userService.registerUser(user);
         }
         return checkInfo;
     }
@@ -62,43 +66,11 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String login(User user) {
-        String mappingMark = "login";
-        String checkInfo = "";
-        if (StringUtils.isNotBlank(user.getUserName())) {
-            checkInfo = userService.checkUsernameIsExist(user, mappingMark);
-            if (!StringUtils.equals(checkInfo, LoginAndRegister.USERNAME_EXIST)) {
-                return LoginAndRegister.NO_SUCH_USER_NAME;
-            }
-        } else {
-            return LoginAndRegister.USERNAME_NOT_EXIST;
-        }
-        checkInfo = userService.checkInputIsNotNull(user, mappingMark);
-        if (LoginAndRegister.PASS_CHECK.equals(checkInfo)) {
-            User localUser = userMapper.queryUserByUserName(user.getUserName());
-            checkInfo = userService.checkPassword(user, mappingMark, localUser);
-        }
+        String mappingMark = ConstantUser.MAPPING_LOGIN;
+        Map inputMap = new HashMap();
+        inputMap.put("user", user);
+        String checkInfo = userService.checkInputData(inputMap, mappingMark);
         return checkInfo;
-    }
-
-    /**
-     * @Author: hanyaning
-     * @Email: hynkoala@163.com
-     * @Date: 2018.09.17
-     * @Param: [checkInfo, mappingMark, map]
-     * @Return:
-     * @Description: 错误信息反馈
-     */
-    @RequestMapping(value = "/error", method = RequestMethod.GET)
-    public String loginAndRegisterError(@RequestParam String checkInfo,
-                                        @RequestParam String mappingMark,
-                                        ModelMap map) {
-        map.addAttribute("mappingMark", mappingMark);
-        if (!StringUtils.isEmpty(checkInfo)) {
-            map.addAttribute("errorInfo", checkInfo);
-        } else {
-            map.addAttribute("errorInfo", checkInfo);
-        }
-        return "error";
     }
 
     /**
@@ -111,16 +83,13 @@ public class UserController {
      */
     @RequestMapping(value = "/toHome")
     public String loginHomepage(@RequestParam String username, ModelMap map) {
+        User user = null;
         if (StringUtils.isBlank(username)) {
-            username = "guest";
-            User user = new User();
-            user.setUserName("guest");
-            map.addAttribute("list", user);
+            user = userMapper.queryUserByUserName("guest");
         } else {
-            User user = userMapper.queryUserByUserName(username);
-            map.addAttribute("list", user);
+            user = userMapper.queryUserByUserName(username);
         }
-
+        map.addAttribute("list", user);
         return "home";
     }
 
@@ -130,15 +99,12 @@ public class UserController {
      * @Date: 2018.08.23
      * @Description: 从前台获取用户输入信息更新用户，并重定向到toMyspace的mapping
      */
-
+    @ResponseBody
     @RequestMapping(value = "/alterUserInfo", method = RequestMethod.POST)
-    public String alterUserInfo(RedirectAttributes attr, User user) {
+    public void alterUserInfo(User user) {
         user.setLastUpdateTime(new Date());
         String username = user.getUserName();
         userMapper.updateUser(user);
-        //User newUser = userMapper.queryUserByUserName(username);
-        attr.addAttribute("username", user.getUserName());
-        return "redirect:/user/toMyspace";
     }
 
     /**
@@ -148,43 +114,38 @@ public class UserController {
      * @Description: 通过用户名查到所有用户信息传到前台myspace.ftl页面，返回值类型转为json
      */
     @RequestMapping(value = "/toMyspace")
-    public ModelAndView toMyspace(@RequestParam String username) {
-        ModelAndView userModel = new ModelAndView();
-        userModel.setViewName("myspace");
-
-        /*JSONObject json = new JSONObject();
-        if (username != null && username != "" && !"guest".equals(username)) {
-            json=getUserInfo(username);
-            userModel.addObject(json);
-        } else {
-            return null;
-        }
-        userModel.addObject(json);*/
-
-        return userModel;
-
+    public String toMyspace(@RequestParam String username) {
+        return "myspace";
     }
 
     @ResponseBody
     @RequestMapping(value = "/getUserInfo")
-    public User getUserInfo(@RequestParam String username) {
-        JSONObject json = new JSONObject();
-        User user = new User();
-
+    public List<User> getUserInfo(@RequestParam(required = false) String username) {
+        User user = null;
+        List<User> userList = null;
         if (StringUtils.isNotBlank(username)) {
-
             user = userMapper.queryUserByUserName(username);
-            //1、使用JSONObject
-            String jsonstr = JSON.toJSONString(user);
-            json = JSON.parseObject(jsonstr);
-            //2、使用JSONArray
-            //JSONArray array = JSONArray.fromObject(user);
+            userList.add(user);
         } else {
-            json.fluentPut("errorInfo", "请先登录！");
+            userList = userMapper.queryAllUser();
         }
-        return user;
-
+        return userList;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/alterPassword")
+    public String alterPassword(User user, @RequestParam String password, @RequestParam String confirmPassword) {
+        String mappingMark = ConstantUser.MAPPING_ALTER_PASSWORD;
+        Map inputMap = new HashMap();
+        inputMap.put("user", user);
+        inputMap.put("confirmPassword", confirmPassword);
+        String checkInfo = userService.checkInputData(inputMap, mappingMark);
+        if (StringUtils.equals(checkInfo, ConstantUser.PASS_CHECK)) {
+            user.setUserPassword(DigestUtils.md5Hex(confirmPassword));
+            userMapper.alterPassword(user);
+            return ConstantUser.SUCCESS;
+        }
+        return checkInfo;
+    }
 }
 

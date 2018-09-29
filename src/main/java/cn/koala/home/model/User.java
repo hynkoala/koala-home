@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class User {
     private String userId;
-    private String username;
+    private String userName;
     private String userPassword;
     private String userTrueName;
     private String userEmail;
@@ -21,12 +21,14 @@ public class User {
     private Date regTime;
     private Date lastUpdateTime;
     private String passwordHint;
+    private Date lastLoginTime;
+    private String adminId;
 
     @Override
     public String toString() {
         return "User{" +
                 "userId='" + userId + '\'' +
-                ", username='" + username + '\'' +
+                ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userTrueName='" + userTrueName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
@@ -36,7 +38,16 @@ public class User {
                 ", regTime=" + regTime +
                 ", lastUpdateTime=" + lastUpdateTime +
                 ", passwordHint='" + passwordHint + '\'' +
+                ", lastLoginTime=" + lastLoginTime +
                 '}';
+    }
+
+    public String getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(String adminId) {
+        this.adminId = adminId;
     }
 
     public String getUserId() {
@@ -48,11 +59,11 @@ public class User {
     }
 
     public String getUserName() {
-        return username;
+        return userName;
     }
 
-    public void setUserName(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getUserPassword() {
@@ -99,7 +110,7 @@ public class User {
         return userAge;
     }
 
-    public void setUserAge(int userAge) {
+    public void setUserAge(Integer userAge) {
         this.userAge = userAge;
     }
 
@@ -125,5 +136,13 @@ public class User {
 
     public void setPasswordHint(String passwordHint) {
         this.passwordHint = passwordHint;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

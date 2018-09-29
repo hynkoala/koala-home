@@ -2,6 +2,8 @@ package cn.koala.home.service;
 
 import cn.koala.home.model.User;
 
+import java.util.Map;
+
 /**
  * Created by user
  * Email:hynkoala@163.com
@@ -40,5 +42,7 @@ public interface UserService {
      */
     String checkUsernameIsExist(User user, String mappingMark);
 
-    String checkInputIsNotNull(User user, String mappingMark);
+    String checkInputData(Map inputMap, String mappingMark);
+
+    void registerUser(User user);
 }

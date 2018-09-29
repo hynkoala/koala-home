@@ -56,7 +56,7 @@
         </div>
     </form>
     <div id="warm-info-area">
-        <input id="warn-info" readonly unselectable="on"/>
+        <input id="warn-info" disabled="true"/>
     </div>
 </div>
 </body>

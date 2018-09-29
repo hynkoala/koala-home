@@ -28,7 +28,7 @@
             function state_Change() {
                 if (xmlhttp.readyState == 4) {// 4 = "loaded"
                     if (xmlhttp.status == 200) {// 200 = "OK"
-                        var str = xmlhttp.responseText;
+                        var str = xmlhttp.responseText[0];
                         //var json = str.parseJSON();
                         json = eval('(' + str + ')');
                         var json1 = JSON.parse(str);
@@ -134,6 +134,7 @@
         <button onclick="alterUserInfo()">更新信息</button>
         </hr>
         <a id="get" href="/koala-home/view/jsp/personal.jsp" style="color:black">进入personal</a>
+        <a href="/koala-home/view/jsp/userManager.jsp" style="color:black">进入用户管理系统</a>
     </div>
     <div id="footer">
         <p id="shengming">

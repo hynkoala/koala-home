@@ -38,7 +38,7 @@
         </div>
         <div class="form-group">
             <label class="label" for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
-            <input class="form-control" type="text" id="password" type="password"/>
+            <input class="form-control" type="password" id="password"/>
         </div>
     </form>
     <div class="btn-group">
@@ -46,10 +46,8 @@
         <button id="to-register" onclick="toRegister()" class="btn btn-default">注册</button>
     </div>
     <div id="warm-info-area">
-        <input id="warn-info" readonly unselectable="on"/>
+        <input id="warn-info" disabled="true"/>
     </div>
 </div>
-
-
 </body>
 </html>

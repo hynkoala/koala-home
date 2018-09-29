@@ -15,13 +15,12 @@
 #biaoqian{
 	position: absolute;
 	width: 976px;
-	top: 193px;
+	top: 192px;
 	height: 31px;
 	left: 0px;
 	padding-top: 5px;
 	padding-left: 50px;
 }
-
 #anniu li {
 	margin-left: 18px;
 	float: left;
@@ -36,7 +35,6 @@ a{
 	color: #e5e5e7;
 	font-family: "黑体";
 	font-size:18px;
-	
 	hover:rgb(5,5,5);
 	
 }
@@ -52,11 +50,9 @@ a{
  a:active {
 	text-decoration: none;
  }
-
 a#register-a {
 	font-size: 12px;
 }
-
 li#register-li {
 	float: right;
 	margin-top: 2px;

@@ -3,6 +3,8 @@ package cn.koala.home.mapper;
 import cn.koala.home.model.User;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by user
  * Email:hynkoala@163.com
@@ -32,6 +34,8 @@ public interface UserMapper {
      */
     User queryUserByUserName(String username);
 
+    List<User> queryAllUser();
+
     /**
      *@Author: hanyaning
      *@Email: hynkoala@163.com
@@ -41,4 +45,14 @@ public interface UserMapper {
      *@Description: 通过user对象更新用户错作
      */
     void updateUser(User user);
+
+    /**
+     * @Author: hanyaning
+     * @Email: hynkoala@163.com
+     * @Date: 2018.09.29
+     * @Param: user
+     * @Return: void
+     * @Description: 改变用户密码
+     */
+    void alterPassword(User user);
 }
