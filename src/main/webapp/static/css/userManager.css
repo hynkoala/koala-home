@@ -1,0 +1,12 @@
+.ui-jqgrid-labels {
+    height: 50px;
+}
+
+.ui-jqgrid {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.ui-jqgrid .ui-jqgrid-htable th div {
+    height: 22px;
+}

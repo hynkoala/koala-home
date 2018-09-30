@@ -120,15 +120,10 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/getUserInfo")
-    public List<User> getUserInfo(@RequestParam(required = false) String username) {
-        User user = null;
-        List<User> userList = null;
-        if (StringUtils.isNotBlank(username)) {
-            user = userMapper.queryUserByUserName(username);
-            userList.add(user);
-        } else {
-            userList = userMapper.queryAllUser();
-        }
+    public List<User> getUserInfo(User user, String userName) {
+        Map map = new HashMap();
+        map.put("userName", userName);
+        List<User> userList = userMapper.queryUsers(map);
         return userList;
     }
 

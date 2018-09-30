@@ -20,12 +20,18 @@
     </resultMap>
 
     <select id="queryUserByUserName" parameterType="string" resultType="cn.koala.home.model.User" resultMap="user">
-        select * from koala_user
-        where user_name = #{userName,jdbcType=VARCHAR}
+        select * from koala_user where user_name=#{userName}
     </select>
 
     <select id="queryAllUser" resultType="list" resultMap="user">
         select * from koala_user
+    </select>
+
+    <select id="queryUsers" parameterType="java.util.Map" resultType="list" resultMap="user">
+        select * from koala_user where 1=1
+        <if test="userName!=null and userName!=''">
+            and user_name=#{userName}
+        </if>
     </select>
 
     <insert id="insertUser" parameterType="cn.koala.home.model.User">

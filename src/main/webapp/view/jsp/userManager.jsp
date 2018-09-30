@@ -10,23 +10,14 @@
 <head>
     <title>用户管理系统</title>
     <jsp:include page="alluse/autoImport.jsp"/>
+    <link type="text/css" rel="stylesheet" href="/koala-home/static/css/userManager.css"/>
     <link rel="stylesheet" href="/koala-home/static/thirdControl/jqgrid/css/ui.jqgrid.css"/>
     <link rel="stylesheet" href="/koala-home/static/thirdControl/jqgrid/css/css/flick/jquery-ui-1.8.16.custom.css"/>
+    <script type="text/javascript" src="/koala-home/static/thirdControl/jquery/jquery-1.8.1.min.js"></script>
     <script type="text/javascript" src="/koala-home/static/thirdControl/jqgrid/js/jquery.jqGrid.src.js"></script>
-    <style>
-        .ui-jqgrid-labels {
-            height: 50px;
-        }
+    <script type="text/javascript" src="/koala-home/static/thirdControl/jqgrid/js/i18n/grid.locale-cn.js"></script>
 
-        .ui-jqgrid {
-            width: 1200px;
-            margin: 0 auto;
-        }
 
-        .ui-jqgrid .ui-jqgrid-htable th div {
-            height: 22px;
-        }
-    </style>
     <script>
         var grid_selector = "#grid-table";
         var pager_selector = "#grid-pager";
@@ -92,9 +83,8 @@
                                         index: 'regTime',
                                         width: '10%',
                                         sortable: false,
-                                        /* formatter: function(cellvalue, options, rowObject) {
-                                         return $.hd_jqGrid.dateTimeFormatter(cellvalue);}*/
-                                        //formatoptions: {srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s'}
+                                        formatter: "date",
+                                        formatoptions: {srcformat: 'u/1000', newformat: 'Y-m-d'}
                                     },
                                     {
                                         name: 'lastUpdateTime',
@@ -112,7 +102,8 @@
                                         name: 'adminId',
                                         index: 'adminId',
                                         width: '5%',
-                                        sortable: false
+                                        sortable: false,
+                                        cellattr: addCellAttr
                                     }
                                 ],
                                 viewrecords: true,//定义是否要显示总记录数
@@ -151,9 +142,17 @@
                             });
             $(grid_selector).jqGrid('navGrid', pager_selector, {edit: false, add: false, del: false});
         });
+        function formatTime(cellvalue) {
+            if (cellvalue) {
+                return new Date(cellvalue).toLocaleString().replace(/\/|年|月/g, "-").replace(/日/g, " ").replace(/下午|上午/g, "");
+            } else {
+                return '';
+            }
+        }
+
         function editLink(cellValue, options, rowdata, action) {
             var str = rowdata.userId;
-            return "<a href=# onclick=openalterqlr('" + str + "')>" + rowdata.userName + "</a>";
+            return "<a href=# onclick=seeCorrectUser('" + str + "')>" + rowdata.userName + "</a>";
         }
         function addCellAttr(rowId, val, rawObject, cm, rdata) {
             return "style='color:orange'"
@@ -199,12 +198,11 @@
         function refreshtable() {
             $("#grid-table").trigger("reloadGrid");
         }
-        function selectBy() {
-            var qlrmc = $("#qlrmc").val();
-            var qlrzjh = $("#qlrzjh").val();
-            var data = {qlrmc: qlrmc, qlrzjh: qlrzjh};
+        function queryUser() {
+            var userName = $("#user-name").val();
+            var data = {userName: userName};
             $("#grid-table").setGridParam({
-                url: "http://localhost:8090/ssm-test/qlr/getQlrBy",
+                url: "http://127.0.0.1:8090/koala-home/user/getUserInfo",
                 datatype: 'json',
                 page: 1,
                 postData: data
@@ -215,15 +213,26 @@
             var url = "/ssm-test/view/addqlr.ftl";
             window.open(url, window, "dialogWidth:700px;status:no;dialogHeight:400px");
         }
-        function openalterqlr(str) {
+        function seeCorrectUser(str) {
             //var dqqlrid = qlrid.toString();
-            var url = "http://localhost:8090/ssm-test/qlr/getQlrById?qlrid=" + str;
+            var url = '/koala-home/user/getUserInfo?userId' + str;
             window.open(url, window, "dialogWidth:700px;status:no;dialogHeight:400px");
         }
-
     </script>
 </head>
 <body>
+<div id="select-area">
+    <form role="form" class="form-inline">
+        <div class="form-group">
+            <label for="user-name">用户名：</label>
+            <input class="form-control" id="user-name">
+        </div>
+    </form>
+    <div class="btn-group">
+        <button class="btn btn-default" onclick="queryUser()">查询</button>
+        <button class="btn btn-default" type="reset">重置</button>
+    </div>
+</div>
 <table id="grid-table"></table>
 <div id="grid-pager"></div>
 </body>

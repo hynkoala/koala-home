@@ -185,7 +185,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void registerUser(User user) throws RuntimeException {
+    public void registerUser(User user) {
         if (user != null) {
             user.setRegTime(new Date());
             user.setLastUpdateTime(new Date());

@@ -4,6 +4,7 @@ import cn.koala.home.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by user
@@ -35,6 +36,8 @@ public interface UserMapper {
     User queryUserByUserName(String username);
 
     List<User> queryAllUser();
+
+    List<User> queryUsers(Map map);
 
     /**
      *@Author: hanyaning
