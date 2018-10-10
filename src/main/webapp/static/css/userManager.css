@@ -1,3 +1,7 @@
+#select-area {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .ui-jqgrid-labels {
     height: 50px;
 }
@@ -9,4 +13,13 @@
 
 .ui-jqgrid .ui-jqgrid-htable th div {
     height: 22px;
+}
+
+table {
+    text-align: center;
+}
+
+.ui-widget-content a {
+    text-decoration: underline;
+    color: #e7586a;
 }

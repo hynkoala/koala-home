@@ -12,11 +12,24 @@
     <jsp:include page="alluse/autoImport.jsp"/>
     <link rel="stylesheet" type="text/css" href="../../static/css/alterPassword.css"/>
     <script>
+        var userName = getUserNameByUrl();
         $(function () {
-
+            $("#user-name").val(userName);
         });
         function alterPassword() {
-
+            var userPassword = $("#password").val();
+            var confirmPassword = $("#confirm-password").val();
+            $.ajax({
+                type: "post",
+                url: "/koala-home/user/alterPassword",
+                data: {userName: userName, userPassword: userPassword, confirmPassword: confirmPassword},
+                success: function (data) {
+                    makeBlockTime(data, 400);
+                },
+                error: function (data) {
+                    makeBlockTime("未知错误！", 400);
+                },
+            })
         }
     </script>
 </head>
@@ -39,9 +52,6 @@
     <div class="btn-group">
         <button id="submit-login" onclick="alterPassword()" class="btn btn-default">修改</button>
         <button id="to-register" onclick="closeWindow()" class="btn btn-default">关闭</button>
-    </div>
-    <div id="warm-info-area">
-        <input id="warn-info" disabled="true"/>
     </div>
 </div>
 </body>

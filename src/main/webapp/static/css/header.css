@@ -57,3 +57,12 @@ li#register-li {
 	float: right;
 	margin-top: 2px;
 }
+
+a#login-a {
+	font-size: 12px;
+}
+
+li#login-li {
+	float: right;
+	margin-top: 2px;
+}

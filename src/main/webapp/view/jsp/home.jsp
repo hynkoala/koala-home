@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <html>
 <head>
-    <title>hynkoala</title>
+    <title>koala之家</title>
     <jsp:include page="alluse/autoImport.jsp"/>
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/homepage.css"/>
 </head>

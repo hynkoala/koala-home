@@ -1,33 +1,23 @@
 /* CSS Document */
 @charset "utf-8";
-body{
-    padding-top:13%;
+body {
+    padding-top: 13%;
 }
-.out-box{
+
+.out-box {
     position: relative;
-    font-size:20px;
+    font-size: 20px;
     background-color: rgb(200, 220, 240);
     width: 400px;
     height: 250px;
-    margin:0 auto;
+    margin: 0 auto;
     /* border:1px solid greenyellow;*/
     padding-top: 40px;
 }
-a{
-    font-size:16px;
-}
 
-#warn-info {
-    text-align: center;
-    width: 400px;
-    border: 0;
-    background-color: inherit;
-    font-size: 14px;
-    color: dodgerblue;
-    padding-left: 6%;
-    margin-top: 16px;
+a {
+    font-size: 16px;
 }
-
 .form-group {
     margin-top: 20px;
     float: left;

@@ -45,4 +45,6 @@ public interface UserService {
     String checkInputData(Map inputMap, String mappingMark);
 
     void registerUser(User user);
+
+    void mulDeleteUsers(String userIds);
 }

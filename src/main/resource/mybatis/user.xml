@@ -16,7 +16,7 @@
         <result property="userTrueName" column="user_true_name" jdbcType="VARCHAR"/>
         <result property="passwordHint" column="password_hint" jdbcType="VARCHAR"/>
         <result property="lastLoginTime" column="last_login_time" jdbcType="DATE"/>
-        <result property="adminId" column="isAdmin" jdbcType="VARCHAR"/>
+        <result property="adminId" column="is_admin" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="queryUserByUserName" parameterType="string" resultType="cn.koala.home.model.User" resultMap="user">
@@ -36,26 +36,45 @@
 
     <insert id="insertUser" parameterType="cn.koala.home.model.User">
         insert into koala_user (user_id, user_name, user_true_name, user_email, user_phone,
-        user_sex, user_age, reg_time, last_update_time, user_password, password_hint,last_login_time)
+        user_sex, user_age, reg_time, last_update_time, user_password, password_hint,last_login_time,is_admin)
         VALUES(#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},
         #{userTrueName,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},
         #{userPhone,jdbcType=VARCHAR},#{userSex,jdbcType=VARCHAR},
         #{userAge,jdbcType=NUMERIC},#{regTime,jdbcType=DATE},
         #{lastUpdateTime,jdbcType=DATE},#{userPassword,jdbcType=VARCHAR},
-        #{passwordHint,jdbcType=VARCHAR}),#{lastLoginTime,jdbcType=DATE}
+        #{passwordHint,jdbcType=VARCHAR},#{lastLoginTime,jdbcType=DATE},
+        #{adminId,jdbcType=VARCHAR})
     </insert>
 
     <update id="updateUser" parameterType="cn.koala.home.model.User">
         UPDATE koala_user
-        SET user_age = #{userAge,jdbcType=NUMERIC},user_phone = #{userPhone,jdbcType=VARCHAR}, user_email = #{userEmail,jdbcType=VARCHAR}
-        ,user_true_name = #{userTrueName,jdbcType=VARCHAR}, user_sex = #{userSex,jdbcType=VARCHAR}
-        , last_update_time = #{lastUpdateTime,jdbcType=DATE},last_login_time=#{lastLoginTime,jdbcType=DATE}
+        SET
+        <if test="userAge!=null">user_age = #{userAge,jdbcType=NUMERIC},</if>
+        <if test="userPhone!=null">user_phone = #{userPhone,jdbcType=VARCHAR},</if>
+        <if test="userEmail!=null">user_email = #{userEmail,jdbcType=VARCHAR},</if>
+        <if test="userTrueName!=null">user_true_name = #{userTrueName,jdbcType=VARCHAR},</if>
+        <if test="lastUpdateTime!=null">last_update_time = #{lastUpdateTime,jdbcType=DATE},</if>
+        <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=DATE},</if>
+        <if test="adminId!=null">is_admin=#{adminId,jdbcType=VARCHAR},</if>
+        <if test="userName!=null">user_name = #{userName,jdbcType=VARCHAR}</if>
         where user_name = #{userName,jdbcType=VARCHAR}
     </update>
 
     <update id="alterPassword" parameterType="cn.koala.home.model.User">
         UPDATE koala_user
-        set user_password = #{userPassword} where user_name=#{userName}
+        set
+        <if test="userPassword!=null">user_password = #{userPassword,jdbcType=VARCHAR},</if>
+        <if test="userName!=null">user_name = #{userName,jdbcType=VARCHAR}</if>
+        where user_name=#{userName}
     </update>
+    <delete id="deleteUserByUserId" parameterType="string">
+        DELETE koala_user where user_id=#{userId}
+    </delete>
 
+    <update id="updateLoginTime" parameterType="cn.koala.home.model.User">
+        update koala_user
+        set
+        <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=DATE}</if>
+        where user_name=#{userName}
+    </update>
 </mapper>

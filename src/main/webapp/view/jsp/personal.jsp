@@ -19,20 +19,23 @@
         #personal-infomation {
             width: 500px;
             margin: 0 auto;
+            margin-top: 20px;
         }
 
         label {
             float: left;
             display: block;
             position: relative;
+            display: table-cell;
+            vertical-align: middle;
         }
     </style>
 
     <script>
         var json;
+        var userName = getUserNameByUrl();
         $(function () {
-
-            var url = '/koala-home/user/getUserInfo?username=hynkoala';
+            var url = '/koala-home/user/getUserInfo?userName=' + userName;
             var xmlhttp = new XMLHttpRequest();
             if (xmlhttp != null) {
                 xmlhttp.onreadystatechange = state_Change;
@@ -42,10 +45,10 @@
             function state_Change() {
                 if (xmlhttp.readyState == 4) {// 4 = "loaded"
                     if (xmlhttp.status == 200) {// 200 = "OK"
-                        var str = xmlhttp.responseText[0];
+                        var str = xmlhttp.responseText;
                         //var json = str.parseJSON();
                         json = eval('(' + str + ')');
-                        putdata(json);
+                        putdata(json[0]);
                     }
                     else {
                         alert("Problem retrieving XML data:" + xmlhttp.statusText);
@@ -62,8 +65,8 @@
             document.getElementById("sex").value = json.userSex;
             document.getElementById("age").value = json.userAge;
             document.getElementById("user-name").innerHTML = json.userName;
-            document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?username=" + json.userName;
-            document.getElementById("to-home").href = "/koala-home/user/toHome?username=" + json.userName;
+            document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?userName=" + json.userName;
+            document.getElementById("to-home").href = "/koala-home/user/toHome?userName=" + json.userName;
         }
         function alterUserInfo() {
             var userName = $("#user-name-2").val();
@@ -85,6 +88,7 @@
                 },
                 success: function () {
                     alert("更新成功！");
+                    window.location.reload();
                 },
                 error: function () {
                     alert("发生未知错误！");
@@ -95,53 +99,48 @@
             window.location.reload();
         }
         function alterPassword() {
-            var url = "alterPassword.jsp";
+            var url = "alterPassword.jsp?userName=" + userName;
             var title = "修改密码";
-            window.open(url, title, 'width:800;heigth:600');
+            window.open(url, title, "width=500px,height=400px,toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no");
         }
     </script>
 </head>
 <body>
 <div id="welcome">
     <jsp:include page="alluse/header.jsp"/>
-
-    <div class="self-inf">
-        <div id="personal-infomation">
-            <form role="form">
-                <div class="form-group">
-                    <label for="user-name-2">名称</label>
-                    <input type="text" class="form-control" readonly="true" id="user-name-2" placeholder="请输入用户名">
-                </div>
-                <div class="form-group">
-                    <label for="user-true-name">真实姓名</label>
-                    <input type="text" class="form-control" id="user-true-name" placeholder="请输入真实姓名">
-                </div>
-                <div class="form-group">
-                    <label for="email">邮箱</label>
-                    <input type="text" class="form-control" id="email" placeholder="请输入邮箱">
-                </div>
-                <div class="form-group">
-                    <label for="phone">邮箱</label>
-                    <input type="text" class="form-control" id="phone" placeholder="请输入邮箱">
-                </div>
-                <div class="form-group">
-                    <label for="sex">性别</label>
-                    <select class="form-control" id="sex">
-                        <option value="1">男</option>
-                        <option value="2">女</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="age">年龄</label>
-                    <input type="text" class="form-control" id="age" placeholder="请输入年龄">
-                </div>
-                <button class="btn btn-default" onclick="alterUserInfo()">更新信息</button>
-                <button class="btn btn-default" onclick="refreshWindow()">重置</button>
-                <button class="btn btn-default" onclick="alterPassword()">修改密码</button>
-            </form>
-        </div>
+    <div id="personal-infomation">
+        <form role="form">
+            <div class="form-group">
+                <label for="user-name-2">名称</label>
+                <input type="text" class="form-control" readonly="true" id="user-name-2" placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="user-true-name">真实姓名</label>
+                <input type="text" class="form-control" id="user-true-name" placeholder="请输入真实姓名">
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="text" class="form-control" id="email" placeholder="请输入邮箱">
+            </div>
+            <div class="form-group">
+                <label for="phone">电话</label>
+                <input type="text" class="form-control" id="phone" placeholder="请输入邮箱">
+            </div>
+            <div class="form-group">
+                <label for="sex">性别</label>
+                <select class="form-control" id="sex">
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">年龄</label>
+                <input type="text" class="form-control" id="age" placeholder="请输入年龄">
+            </div>
+        </form>
+        <button class="btn btn-default" onclick="alterUserInfo()">更新信息</button>
+        <button class="btn btn-default" onclick="alterPassword()">修改密码</button>
     </div>
-    <jsp:include page="alluse/footer.jsp"></jsp:include>
 </div>
 
 </body>

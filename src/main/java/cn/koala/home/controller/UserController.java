@@ -70,6 +70,10 @@ public class UserController {
         Map inputMap = new HashMap();
         inputMap.put("user", user);
         String checkInfo = userService.checkInputData(inputMap, mappingMark);
+        if (StringUtils.equals(checkInfo, ConstantUser.PASS_CHECK)) {
+            user.setLastLoginTime(new Date());
+            userMapper.updateLoginTime(user);
+        }
         return checkInfo;
     }
 
@@ -77,17 +81,17 @@ public class UserController {
      * @Author: hanyaning
      * @Email: hynkoala@163.com
      * @Date: 2018.09.17
-     * @Param: [username, map]
+     * @Param: [userName, map]
      * @Return:
      * @Description: 返回主页
      */
     @RequestMapping(value = "/toHome")
-    public String loginHomepage(@RequestParam String username, ModelMap map) {
+    public String loginHomepage(@RequestParam String userName, ModelMap map) {
         User user = null;
-        if (StringUtils.isBlank(username)) {
+        if (StringUtils.isBlank(userName)) {
             user = userMapper.queryUserByUserName("guest");
         } else {
-            user = userMapper.queryUserByUserName(username);
+            user = userMapper.queryUserByUserName(userName);
         }
         map.addAttribute("list", user);
         return "home";
@@ -103,7 +107,7 @@ public class UserController {
     @RequestMapping(value = "/alterUserInfo", method = RequestMethod.POST)
     public void alterUserInfo(User user) {
         user.setLastUpdateTime(new Date());
-        String username = user.getUserName();
+        String userName = user.getUserName();
         userMapper.updateUser(user);
     }
 
@@ -114,7 +118,7 @@ public class UserController {
      * @Description: 通过用户名查到所有用户信息传到前台myspace.ftl页面，返回值类型转为json
      */
     @RequestMapping(value = "/toMyspace")
-    public String toMyspace(@RequestParam String username) {
+    public String toMyspace(@RequestParam String userName) {
         return "myspace";
     }
 
@@ -129,7 +133,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping(value = "/alterPassword")
-    public String alterPassword(User user, @RequestParam String password, @RequestParam String confirmPassword) {
+    public String alterPassword(User user, String userPassword, String confirmPassword) {
         String mappingMark = ConstantUser.MAPPING_ALTER_PASSWORD;
         Map inputMap = new HashMap();
         inputMap.put("user", user);
@@ -141,6 +145,14 @@ public class UserController {
             return ConstantUser.SUCCESS;
         }
         return checkInfo;
+    }
+
+    @ResponseBody
+    @RequestMapping("/deleteUser")
+    public String deleteUser(String userIds) {
+        String msg = "error";
+        userService.mulDeleteUsers(userIds);
+        return msg;
     }
 }
 

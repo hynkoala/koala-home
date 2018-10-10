@@ -172,7 +172,7 @@ public class UserServiceImpl implements UserService {
                             checkInfo = ConstantUser.PASSWORD_NOT_EXIST;
                         } else if (StringUtils.isBlank(confirmPassword)) {
                             checkInfo = ConstantUser.CONFIRM_PASSWORD_NOT_EXIST;
-                        } else if (StringUtils.equals(user.getUserPassword(), confirmPassword)) {
+                        } else if (!StringUtils.equals(user.getUserPassword(), confirmPassword)) {
                             checkInfo = ConstantUser.PASSWORD_NOT_EQUAL;
                         } else {
                             checkInfo = ConstantUser.PASS_CHECK;
@@ -194,6 +194,16 @@ public class UserServiceImpl implements UserService {
             //对密码进行加密
             user.setUserPassword(md5Hex(user.getUserPassword()));
             userMapper.insertUser(user);
+        }
+    }
+
+    @Override
+    public void mulDeleteUsers(String userIds) {
+        if (StringUtils.isNotBlank(userIds)) {
+            String[] userIdArray = userIds.split(",");
+            for (String userId : userIdArray) {
+                userMapper.deleteUserByUserId(userId);
+            }
         }
     }
 }

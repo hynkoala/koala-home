@@ -3,7 +3,7 @@
  */
 function getUsername(){
  var url = location.search;
- var theRequest = new Object();
+    var theRequest = {};
  if (url.indexOf("?") != -1) {
  var str = url.substr(1);
  strs = str.split("&");
@@ -11,11 +11,11 @@ function getUsername(){
  theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
  }
  }
- return theRequest.username;
+    return theRequest.userName;
  }
 window.onload = function(){
-    username=getUsername();
-    document.getElementById("to-home").href="/koala-home/user/toHome?username="+username;
-    document.getElementById("to-myspace").href="/koala-home/user/toMyspace?username="+username;
-    document.getElementById("user-name").innerHTML = username;
-}
+    userName = getUsername();
+    document.getElementById("to-home").href = "/koala-home/user/toHome?userName=" + userName;
+    document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?userName=" + userName;
+    document.getElementById("user-name").innerHTML = userName;
+};

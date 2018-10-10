@@ -7,23 +7,23 @@
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/login.css"/>
     <script>
         function checkUser() {
-            var username = $("#user-name").val();
+            var userName = $("#user-name").val();
             var password = $("#password").val();
             $.ajax({
                 type: "post",
                 url: "/koala-home/user/login",
-                data: {userName: username, userPassword: password},
+                data: {userName: userName, userPassword: password},
                 success: function (data) {
                     if (data == "验证通过！") {
-                        window.location.href = "/koala-home/user/toHome?username=" + username;
-                        $("#warn-info").val("loading...");
+                        makeBlockTime("欢迎来到koala之家", 400);
+                        window.location.href = "/koala-home/user/toHome?userName=" + userName;
                     } else {
-                        $("#warn-info").val(data);
+                        makeBlockTime(data, 400);
                     }
 
                 },
                 error: function () {
-                    $("#warn-info").val("发生未知错误！");
+                    makeBlockTime("发生未知错误！", 1000);
                 }
             })
         }
@@ -40,14 +40,11 @@
             <label class="label" for="password">密&nbsp;&nbsp;&nbsp;&nbsp;码：</label>
             <input class="form-control" type="password" id="password"/>
         </div>
+        <div class="btn-group">
+            <button id="submit-login" onclick="checkUser();return false" class="btn btn-info">登陆</button>
+            <button id="to-register" onclick="toRegister();return false" class="btn btn-default">注册</button>
+        </div>
     </form>
-    <div class="btn-group">
-        <button id="submit-login" onclick="checkUser()" class="btn btn-default">登陆</button>
-        <button id="to-register" onclick="toRegister()" class="btn btn-default">注册</button>
-    </div>
-    <div id="warm-info-area">
-        <input id="warn-info" disabled="true"/>
-    </div>
 </div>
 </body>
 </html>

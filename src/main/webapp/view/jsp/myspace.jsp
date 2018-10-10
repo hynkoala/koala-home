@@ -4,12 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>hynkoala</title>
     <jsp:include page="alluse/autoImport.jsp"></jsp:include>
-    <link rel="stylesheet" type="text/css" href="/koala-home/static/css/homepage.css"/>
+    <link type="text/css" rel="stylesheet" href="/koala-home/static/css/myspace.css"/>
+    <link rel="stylesheet" type="text/css" href="/koala-home/static/css/home.css"/>
     <script>
         var json ;
+        var userName = getUserNameByUrl();
         $(function () {
-
-            var url = '/koala-home/user/getUserInfo?username=hynkoala';
+            var url = '/koala-home/user/getUserInfo?userName=' + userName;
             var xmlhttp = new XMLHttpRequest();
             if (xmlhttp!=null)
             {
@@ -33,64 +34,33 @@
                             var obj = json[i];
                             console.log('第'+i+'组：'+obj.grade+obj.losal+obj.hisal);
                         }
-                        // document.getElementById("aaa").innerHTML=json[2].grade;
-                        document.getElementById("user-name").innerHTML = json.userName;
-                        document.getElementById("user-name-2").value = json.userName;
-                        document.getElementById("user-true-name").value = json.userTrueName;
-                        document.getElementById("email").value = json.userEmail;
-                        document.getElementById("phone").value = json.userPhone;
-                        document.getElementById("sex").value = json.userSex;
-                        document.getElementById("age").value = json.userAge;
-                        document.getElementById("user-name").innerHTML = json.userName;
-                        document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?username=" + json.userName;
-                        document.getElementById("to-home").href = "/koala-home/user/toHome?username=" + json.userName;
-
-
                     }
                     else {
                         alert("Problem retrieving XML data:" + xmlhttp.statusText);
                     }
                 }
             }
-
         });
-        function putdata(){
-            document.getElementById("user-name").innerHTML = json.userName;
-            document.getElementById("user-name-2").value = json.userName;
-            document.getElementById("user-true-name").value = json.userTrueName;
-            document.getElementById("email").value = json.userEmail;
-            document.getElementById("phone").value = json.userPhone;
-            document.getElementById("sex").value = json.userSex;
-            document.getElementById("age").value = json.userAge;
-            document.getElementById("user-name").innerHTML = json.userName;
-            document.getElementById("myspace").href = "/koala-home/user/toMyspace?username=" + json.userName;
-            document.getElementById("to-home").href = "/koala-home/user/toHome?username=" + json.userName;
+
+        function toPersonal() {
+            var url = "/koala-home/view/jsp/personal.jsp?userName=" + userName;
+            window.open(url, "个人信息");
         }
-        function alterUserInfo() {
-            var userName = $("#user-name-2").val();
-            var userTrueName = $("#user-true-name").val();
-            var userSex = $("#sex").val();
-            var userAge = $("#age").val();
-            var userEmail = $("#email").val();
-            var userPhone = $("#phone").val();
-            $.ajax({
-                type: "post",
-                url: "/koala-home/user/alterUserInfo",
-                data: {
-                    userName: userName,
-                    userTrueName: userTrueName,
-                    userSex: userSex,
-                    userAge: userAge,
-                    userEmail: userEmail,
-                    userPhone: userPhone
-                },
-                success: function () {
-                    alert("更新成功！");
-                },
-                error: function () {
-                    alert("发生未知错误！");
+        function toUserManager() {
+            var url = "/koala-home/view/jsp/userManager.jsp";
+            window.open(url, "用户管理");
+        }
+        function getUserNameByUrl() {
+            var url = location.search;
+            var theRequest = {};
+            if (url.indexOf("?") != -1) {
+                var str = url.substr(1);
+                strs = str.split("&");
+                for (var i = 0; i < strs.length; i++) {
+                    theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
                 }
-            })
+            }
+            return theRequest.userName;
         }
     </script>
 
@@ -103,36 +73,15 @@
 <body>
 <div id="welcome">
     <jsp:include page="alluse/header.jsp"/>
-
-    <div class="self-infj">
-        <script>
-
-        </script>
+    <div id="content-group">
+        <div id="content-personal" class="content-item" onclick="toPersonal()"><span class="content-font"> 个人信息管理</span>
+        </div>
+        <div id="content-userManager" class="content-item" onclick="toUserManager()"><span
+                class="content-font">用户管理系统</span></div>
+        <div id="content-chatRoom" class="content-item" onclick="toPersonal()"><span class="content-font">进入聊天室</span>
+        </div>
     </div>
-
-    <div class="self-inf">
-            <table>
-                <tr>
-                    <td>用户名：<input id="user-name-2" name="userName"/></td>
-                    <td>真实姓名：<input id="user-true-name" name="userTrueName"/></td>
-                    <td>邮箱：<input id="email" name="userEmail"/></td>
-                </tr>
-                <tr>
-                    <td>电  话：<input id="phone" name="userPhone"/></td>
-                    <td>性  别：<input id="sex" name="userSex"/></td>
-                    <td>年龄：<input id="age" name="userAge"/></td>
-                </tr>
-            </table>
-        <button onclick="alterUserInfo()">更新信息</button>
-        </hr>
-        <a id="get" href="/koala-home/view/jsp/personal.jsp" style="color:black">进入personal</a>
-        <a href="/koala-home/view/jsp/userManager.jsp" style="color:black">进入用户管理系统</a>
-    </div>
-    <div id="footer">
-        <p id="shengming">
-            copyright &nbsp;&nbsp;   hynkoala
-        </p>
-    </div>
+    <jsp:include page="alluse/footer.jsp"/>
 </div>
 
 </body>
