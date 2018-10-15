@@ -49,21 +49,25 @@
 
         a:link {
             color: black;
+            text-decoration: none;
         }
 
           /* 未被访问的链接 蓝色 */
         a:visited {
             color: black;
+            text-decoration: none;
         }
 
           /* 已被访问过的链接 蓝色 */
         a:hover {
             color: black;
+            text-decoration: none;
         }
 
           /* 鼠标悬浮在上的链接 蓝色 */
         a:active {
             color: black;
+            text-decoration: none;
         }
 
         .table-title {
@@ -73,7 +77,12 @@
             font-weight: bold;
         }
 
-        /* 鼠标点中激活链接 蓝色 */
+        input#print-button {
+            background-color: lightskyblue;
+            padding: 5px 10px;
+            font-size: 14px;
+        }
+
     </style>
     <script type="text/javascript" src="/koala-home/static/thirdControl/jquery/jQuery.js"></script>
     <script type="text/javascript" src="/koala-home/static/thirdControl/jqgrid/js/jquery.jqGrid.src.js"></script>
@@ -106,8 +115,7 @@
                                         index: 'userName',
                                         width: '10%',
                                         heigth: '30px',
-                                        sortable: false,
-                                        //formatter: editLink
+                                        sortable: false
                                     },
                                     {
                                         name: 'userTrueName',
@@ -143,52 +151,34 @@
                                         name: 'regTime',
                                         index: 'regTime',
                                         width: '10%',
-                                        sortable: false,
-                                        formatter: "date",
-                                        //formatoptions: {srcformat: 'u/1000', newformat: 'Y-m-d'}
+                                        sortable: false
                                     },
                                     {
                                         name: 'lastUpdateTime',
                                         index: 'lastUpdateTime',
                                         width: '10%',
-                                        sortable: false,
-                                        formatter: "date",
-                                        //formatoptions: {srcformat: 'u/1000', newformat: 'Y-m-d'}
+                                        sortable: false
                                     },
                                     {
                                         name: 'lastLoginTime',
                                         index: 'lastLoginTime',
                                         width: '10%',
-                                        sortable: false,
-                                        formatter: "date",
-                                        //formatoptions: {srcformat: 'u/1000', newformat: 'Y-m-d'}
+                                        sortable: false
                                     },
                                     {
                                         name: 'adminId',
                                         index: 'adminId',
                                         width: '5%',
-                                        sortable: false,
-                                        //cellattr: addCellAttr
+                                        sortable: false
                                     }
                                 ],
                                 viewrecords: false,//定义是否要显示总记录数
-                                //loadui: "enable",
                                 loadonce: true,//不配置始终只显示页面显示的数据，无法显示隐藏的后面的数据，导致无法翻页
                                 multiselect: false,//不配置不会显示复选框
-                                //multiboxonly: true,
-                                //viewrecords: true,
                                 rowNum: -1,
-                                //rowList: [5, 10, 20],
-                                //pgbuttons: true,
-                                //pager: pager_selector,
-                                // pagerpos: "left",
-                                //altRows: true,
                                 rownumbers: true,
                                 rownumWidth: 50,
-                                //editurl: "", //nothing is saved
-                                //caption: "",
-                                autowidth: true,
-                                autoheight: false
+                                autowidth: true
                             });
             if (printData != null && printData != 'undefined') {
                 for (i = 0; i < printData.length; i++) {
@@ -197,13 +187,32 @@
                 }
             }
         });
+
+        function preview(oper) {
+            if (oper < 10) {
+                bdhtml = window.document.body.innerHTML;//获取当前页的html代码
+                sprnstr = "<!--startprint" + oper + "-->";//设置打印开始区域
+                eprnstr = "<!--endprint" + oper + "-->";//设置打印结束区域
+                prnhtml = bdhtml.substring(bdhtml.indexOf(sprnstr) + 18); //从开始代码向后取html
+                prnhtml = prnhtml.substring(0, prnhtml.indexOf(eprnstr));//从结束代码向前取html
+                window.document.body.innerHTML = prnhtml;
+                window.print();
+                window.document.body.innerHTML = bdhtml;
+            } else {
+                window.print();
+            }
+        }
     </script>
 </head>
 <body>
+<input type=button id="print-button" value='打印' onclick="preview(1)"
+       style="background-image: url('/koala-home/static/alluse/buttonPrint.jpg')"/>
+<!--startprint1-->
 <div id="out-box">
-    <div class="table-title">用户信息查询</div>
+    <div class="table-title">用户信息表</div>
     <table id="grid-table"></table>
 </div>
+<!--endprint1-->
 <%--<div id="grid-pager"></div>--%>
 </body>
 </html>

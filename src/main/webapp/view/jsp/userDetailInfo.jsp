@@ -52,7 +52,7 @@
     </style>
 
     <script>
-        var json;
+        var user;
         var userName = getUserNameByUrl();
         $(function () {
             var url = '/koala-home/user/getUserInfo?userName=' + userName;
@@ -66,9 +66,9 @@
                 if (xmlhttp.readyState == 4) {// 4 = "loaded"
                     if (xmlhttp.status == 200) {// 200 = "OK"
                         var str = xmlhttp.responseText;
-                        //var json = str.parseJSON();
-                        json = eval('(' + str + ')');
-                        putdata(json[0]);
+                        //var user = str.parseJSON();
+                        user = eval('(' + str + ')')[0];
+                        putdata(user);
                     }
                     else {
                         alert("Problem retrieving XML data:" + xmlhttp.statusText);
@@ -76,18 +76,24 @@
                 }
             }
         });
-        function putdata(json) {
-            document.getElementById("user-name-2").value = json.userName;
-            document.getElementById("user-true-name").value = json.userTrueName;
-            document.getElementById("email").value = json.userEmail;
-            document.getElementById("phone").value = json.userPhone;
-            document.getElementById("sex").value = json.userSex;
-            document.getElementById("age").value = json.userAge;
-            if (json.adminId == 1) {
+        function putdata(user) {
+            document.getElementById("user-name-2").value = user.userName;
+            document.getElementById("user-true-name").value = user.userTrueName;
+            document.getElementById("email").value = user.userEmail;
+            document.getElementById("phone").value = user.userPhone;
+            document.getElementById("sex").value = user.userSex;
+            document.getElementById("age").value = user.userAge;
+            if (user.adminId != 0) {
                 document.getElementById("isAdmin").checked = true;
             }
         }
         function alterUserInfo() {
+            var isSuperAdmin = user.adminId;
+            if (user.adminId == '2') {
+                alert('超级管理员信息不可被修改！');
+                window.close();
+                return;
+            }
             var userName = $("#user-name-2").val();
             var userTrueName = $("#user-true-name").val();
             var userSex = $("#sex").val();
@@ -100,7 +106,6 @@
             } else {
                 adminId = 0;
             }
-
             $.ajax({
                 type: "post",
                 url: "/koala-home/user/alterUserInfo",
@@ -126,11 +131,6 @@
         function refreshWindow() {
 
             window.location.reload();
-        }
-        function alterPassword() {
-            var url = "alterPassword.jsp";
-            var title = "修改密码";
-            window.open(url, title, 'width:800;heigth:600');
         }
     </script>
 </head>

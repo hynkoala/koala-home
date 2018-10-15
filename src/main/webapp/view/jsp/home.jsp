@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div id="welcome">
+<div id="out-box">
     <jsp:include page="alluse/header.jsp"/>
     <div id="content">
         <div id="dongtai">

@@ -1,6 +1,8 @@
 /**
  * Created by user on 2018/9/25.
  */
+var userName = getUserNameByUrl();
+var homeUrl = "/koala-home";
 /*window.onload=function(){
  var enabled=0;
  var today=new Date();

@@ -152,7 +152,10 @@ function formatSex(cellvalue) {
 }
 function formatAdmin(cellvalue) {
     if (cellvalue == 1) {
-        return "是";
+        return "普通";
+    }
+    else if (cellvalue == 2) {
+        return "超级";
     }
     else {
         return "否";
@@ -168,6 +171,14 @@ function addCellAttr(rowId, val, rawObject, cm, rdata) {
 
 function muldelete() {
     var ids = $(grid_selector).jqGrid('getGridParam', 'selarrrow');
+    var adminId;
+    for (i = 0; i < ids.length; i++) {
+        adminId = $(grid_selector).getRowData(ids[i]).adminId;
+        if (adminId == '2') {
+            alert("存在不可被删除的用户！");
+            return;
+        }
+    }
     var userIds = ids.toString();
     $.ajax({
         type: 'post',
@@ -197,7 +208,7 @@ function queryUser() {
 function seeCorrectUser(str) {
     //var dqqlrid = qlrid.toString();
     var url = '/koala-home/view/jsp/userDetailInfo.jsp?userName=' + str;
-    window.open(url, window, "width=400px,height=450px,toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no");
+    window.open(url, window, "width=500px,height=450px,toolbar=no, menubar=no, scrollbars=no, resizable=yes,location=no, status=no");
 }
 function toPrint() {
     select_users = getSelectData();

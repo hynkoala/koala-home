@@ -5,7 +5,7 @@
     <jsp:include page="alluse/autoImport.jsp"/>
 
     <style>
-        #welcome {
+        #out-box {
 
             width: 1024px;
             height: 768px;
@@ -32,7 +32,7 @@
     </style>
 
     <script>
-        var json;
+        var user;
         var userName = getUserNameByUrl();
         $(function () {
             var url = '/koala-home/user/getUserInfo?userName=' + userName;
@@ -46,9 +46,9 @@
                 if (xmlhttp.readyState == 4) {// 4 = "loaded"
                     if (xmlhttp.status == 200) {// 200 = "OK"
                         var str = xmlhttp.responseText;
-                        //var json = str.parseJSON();
-                        json = eval('(' + str + ')');
-                        putdata(json[0]);
+                        //var user = str.parseJSON();
+                        user = eval('(' + str + ')')[0];
+                        putdata(user);
                     }
                     else {
                         alert("Problem retrieving XML data:" + xmlhttp.statusText);
@@ -56,17 +56,17 @@
                 }
             }
         });
-        function putdata(json) {
-            document.getElementById("user-name").innerHTML = json.userName;
-            document.getElementById("user-name-2").value = json.userName;
-            document.getElementById("user-true-name").value = json.userTrueName;
-            document.getElementById("email").value = json.userEmail;
-            document.getElementById("phone").value = json.userPhone;
-            document.getElementById("sex").value = json.userSex;
-            document.getElementById("age").value = json.userAge;
-            document.getElementById("user-name").innerHTML = json.userName;
-            document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?userName=" + json.userName;
-            document.getElementById("to-home").href = "/koala-home/user/toHome?userName=" + json.userName;
+        function putdata(user) {
+            document.getElementById("user-name").innerHTML = user.userName;
+            document.getElementById("user-name-2").value = user.userName;
+            document.getElementById("user-true-name").value = user.userTrueName;
+            document.getElementById("email").value = user.userEmail;
+            document.getElementById("phone").value = user.userPhone;
+            document.getElementById("sex").value = user.userSex;
+            document.getElementById("age").value = user.userAge;
+            document.getElementById("user-name").innerHTML = user.userName;
+            document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?userName=" + user.userName;
+            document.getElementById("to-home").href = "/koala-home/user/toHome?userName=" + user.userName;
         }
         function alterUserInfo() {
             var userName = $("#user-name-2").val();
@@ -106,7 +106,7 @@
     </script>
 </head>
 <body>
-<div id="welcome">
+<div id="out-box">
     <jsp:include page="alluse/header.jsp"/>
     <div id="personal-infomation">
         <form role="form">

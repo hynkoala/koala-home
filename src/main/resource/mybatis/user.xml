@@ -56,6 +56,7 @@
         <if test="lastUpdateTime!=null">last_update_time = #{lastUpdateTime,jdbcType=DATE},</if>
         <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=DATE},</if>
         <if test="adminId!=null">is_admin=#{adminId,jdbcType=VARCHAR},</if>
+        <if test="userSex!=null">user_sex = #{userSex,jdbcType=VARCHAR},</if>
         <if test="userName!=null">user_name = #{userName,jdbcType=VARCHAR}</if>
         where user_name = #{userName,jdbcType=VARCHAR}
     </update>

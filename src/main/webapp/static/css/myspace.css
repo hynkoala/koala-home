@@ -9,8 +9,10 @@
 }
 
 #content-group {
+    position: relative;
     padding: 30px;
     margin: 0 auto;
+    height: 483px;
 }
 
 #content-personal {

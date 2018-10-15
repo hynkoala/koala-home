@@ -7,7 +7,7 @@
     <link type="text/css" rel="stylesheet" href="/koala-home/static/css/myspace.css"/>
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/home.css"/>
     <script>
-        var json ;
+        var user;
         var userName = getUserNameByUrl();
         $(function () {
             var url = '/koala-home/user/getUserInfo?userName=' + userName;
@@ -21,19 +21,9 @@
             function state_Change() {
                 if (xmlhttp.readyState == 4) {// 4 = "loaded"
                     if (xmlhttp.status == 200) {// 200 = "OK"
-                        var str = xmlhttp.responseText[0];
-                        //var json = str.parseJSON();
-                        json = eval('(' + str + ')');
-                        var json1 = JSON.parse(str);
-
-                        console.log(str);
-                        console.log(json);
-                        console.log(json1);
-                        //console.log(json.get(0).grade);
-                        for(var i=0;i<json.length;i++){
-                            var obj = json[i];
-                            console.log('第'+i+'组：'+obj.grade+obj.losal+obj.hisal);
-                        }
+                        var str = xmlhttp.responseText;
+                        //var user = str.parseJSON();
+                        user = eval('(' + str + ')')[0];
                     }
                     else {
                         alert("Problem retrieving XML data:" + xmlhttp.statusText);
@@ -44,11 +34,16 @@
 
         function toPersonal() {
             var url = "/koala-home/view/jsp/personal.jsp?userName=" + userName;
-            window.open(url, "个人信息");
+            window.location.href = url;
+            window.title = "个人信息管理";
         }
         function toUserManager() {
             var url = "/koala-home/view/jsp/userManager.jsp";
-            window.open(url, "用户管理");
+            if (user.adminId == 0) {
+                makeBlockTime("非管理员不能登陆", 500);
+            } else {
+                window.open(url, "用户管理");
+            }
         }
         function getUserNameByUrl() {
             var url = location.search;
@@ -71,7 +66,7 @@
 </head>
 
 <body>
-<div id="welcome">
+<div id="out-box">
     <jsp:include page="alluse/header.jsp"/>
     <div id="content-group">
         <div id="content-personal" class="content-item" onclick="toPersonal()"><span class="content-font"> 个人信息管理</span>
