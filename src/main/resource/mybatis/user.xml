@@ -7,15 +7,15 @@
         <id property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="userName" column="user_name" jdbcType="VARCHAR"/>
         <result property="userPassword" column="user_password" jdbcType="VARCHAR"/>
-        <result property="regTime" column="reg_time" jdbcType="DATE"/>
-        <result property="lastUpdateTime" column="last_update_time" jdbcType="DATE"/>
+        <result property="regTime" column="reg_time" jdbcType="TIMESTAMP"/>
+        <result property="lastUpdateTime" column="last_update_time" jdbcType="TIMESTAMP"/>
         <result property="userAge" column="user_age" jdbcType="NUMERIC"/>
         <result property="userEmail" column="user_email" jdbcType="VARCHAR"/>
         <result property="userPhone" column="user_phone" jdbcType="VARCHAR"/>
         <result property="userSex" column="user_sex" jdbcType="VARCHAR"/>
         <result property="userTrueName" column="user_true_name" jdbcType="VARCHAR"/>
         <result property="passwordHint" column="password_hint" jdbcType="VARCHAR"/>
-        <result property="lastLoginTime" column="last_login_time" jdbcType="DATE"/>
+        <result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
         <result property="adminId" column="is_admin" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -40,9 +40,9 @@
         VALUES(#{userId,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR},
         #{userTrueName,jdbcType=VARCHAR},#{userEmail,jdbcType=VARCHAR},
         #{userPhone,jdbcType=VARCHAR},#{userSex,jdbcType=VARCHAR},
-        #{userAge,jdbcType=NUMERIC},#{regTime,jdbcType=DATE},
-        #{lastUpdateTime,jdbcType=DATE},#{userPassword,jdbcType=VARCHAR},
-        #{passwordHint,jdbcType=VARCHAR},#{lastLoginTime,jdbcType=DATE},
+        #{userAge,jdbcType=NUMERIC},#{regTime,jdbcType=TIMESTAMP},
+        #{lastUpdateTime,jdbcType=TIMESTAMP},#{userPassword,jdbcType=VARCHAR},
+        #{passwordHint,jdbcType=VARCHAR},#{lastLoginTime,jdbcType=TIMESTAMP},
         #{adminId,jdbcType=VARCHAR})
     </insert>
 
@@ -53,8 +53,8 @@
         <if test="userPhone!=null">user_phone = #{userPhone,jdbcType=VARCHAR},</if>
         <if test="userEmail!=null">user_email = #{userEmail,jdbcType=VARCHAR},</if>
         <if test="userTrueName!=null">user_true_name = #{userTrueName,jdbcType=VARCHAR},</if>
-        <if test="lastUpdateTime!=null">last_update_time = #{lastUpdateTime,jdbcType=DATE},</if>
-        <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=DATE},</if>
+        <if test="lastUpdateTime!=null">last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},</if>
+        <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=TIMESTAMP},</if>
         <if test="adminId!=null">is_admin=#{adminId,jdbcType=VARCHAR},</if>
         <if test="userSex!=null">user_sex = #{userSex,jdbcType=VARCHAR},</if>
         <if test="userName!=null">user_name = #{userName,jdbcType=VARCHAR}</if>
@@ -75,7 +75,7 @@
     <update id="updateLoginTime" parameterType="cn.koala.home.model.User">
         update koala_user
         set
-        <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=DATE}</if>
+        <if test="lastLoginTime!=null">last_login_time=#{lastLoginTime,jdbcType=TIMESTAMP}</if>
         where user_name=#{userName}
     </update>
 </mapper>

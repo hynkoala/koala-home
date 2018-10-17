@@ -4,6 +4,7 @@ import cn.koala.home.model.Diary;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by 12732
@@ -15,7 +16,7 @@ import java.util.List;
 @Repository
 public interface DiaryMapper {
 
-    List<Diary> getDiary(String inputData);
+    List<Diary> getDiary(Map map);
 
     void addDiary(Diary diary);
 }

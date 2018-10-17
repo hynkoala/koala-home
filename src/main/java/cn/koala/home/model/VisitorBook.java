@@ -46,4 +46,19 @@ public class VisitorBook {
     public void setWriteTime(Date writeTime) {
         this.writeTime = writeTime;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"bookId\":\"")
+                .append(bookId).append('\"');
+        sb.append(",\"userName\":\"")
+                .append(userName).append('\"');
+        sb.append(",\"bookContent\":\"")
+                .append(bookContent).append('\"');
+        sb.append(",\"writeTime\":\"")
+                .append(writeTime).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

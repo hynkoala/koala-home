@@ -26,20 +26,35 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "userId='" + userId + '\'' +
-                ", userName='" + userName + '\'' +
-                ", userPassword='" + userPassword + '\'' +
-                ", userTrueName='" + userTrueName + '\'' +
-                ", userEmail='" + userEmail + '\'' +
-                ", userPhone='" + userPhone + '\'' +
-                ", userSex='" + userSex + '\'' +
-                ", userAge=" + userAge +
-                ", regTime=" + regTime +
-                ", lastUpdateTime=" + lastUpdateTime +
-                ", passwordHint='" + passwordHint + '\'' +
-                ", lastLoginTime=" + lastLoginTime +
-                '}';
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"userId\":\"")
+                .append(userId).append('\"');
+        sb.append(",\"userName\":\"")
+                .append(userName).append('\"');
+        sb.append(",\"userPassword\":\"")
+                .append(userPassword).append('\"');
+        sb.append(",\"userTrueName\":\"")
+                .append(userTrueName).append('\"');
+        sb.append(",\"userEmail\":\"")
+                .append(userEmail).append('\"');
+        sb.append(",\"userPhone\":\"")
+                .append(userPhone).append('\"');
+        sb.append(",\"userSex\":\"")
+                .append(userSex).append('\"');
+        sb.append(",\"userAge\":")
+                .append(userAge);
+        sb.append(",\"regTime\":\"")
+                .append(regTime).append('\"');
+        sb.append(",\"lastUpdateTime\":\"")
+                .append(lastUpdateTime).append('\"');
+        sb.append(",\"passwordHint\":\"")
+                .append(passwordHint).append('\"');
+        sb.append(",\"lastLoginTime\":\"")
+                .append(lastLoginTime).append('\"');
+        sb.append(",\"adminId\":\"")
+                .append(adminId).append('\"');
+        sb.append('}');
+        return sb.toString();
     }
 
     public String getAdminId() {

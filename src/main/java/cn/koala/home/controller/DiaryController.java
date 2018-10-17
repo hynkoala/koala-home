@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by 12732
@@ -29,8 +27,9 @@ public class DiaryController {
     @RequestMapping("/getDiary")
     public List<Diary> DiaryController(@RequestParam(required = false) String inputData) {
 
-
-        return diaryMapper.getDiary(inputData);
+        Map map = new HashMap<>();
+        map.put("inputData",inputData);
+        return diaryMapper.getDiary(map);
     }
 
     @ResponseBody

@@ -4,7 +4,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>日志</title>
     <jsp:include page="alluse/autoImport.jsp"/>
-
+    <style>
+        #content{
+            padding:20px 50px;
+        }
+        input#diary-title{
+            width:400px;
+        }
+        textarea#diary-content{
+            height: 200px;
+        }
+    </style>
     <script>
         var diaryTitle;
         var diaryContent;
@@ -34,8 +44,7 @@
     <div id="content">
         <form role="form" class="inline">
             <div class="form-group">
-                <label class="left" for="diary-title">标题</label>
-                <textarea class="form-control" id="diary-title" placeholder=""></textarea>
+                <input class="form-control" id="diary-title" placeholder="请输入标题">
             </div>
             <div class="form-group">
                 <textarea class="form-control" id="diary-content" placeholder=""></textarea>

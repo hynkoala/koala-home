@@ -1,7 +1,9 @@
 package cn.koala.home.controller;
 
 import cn.koala.home.constant.ConstantUser;
+import cn.koala.home.mapper.DiaryMapper;
 import cn.koala.home.mapper.UserMapper;
+import cn.koala.home.model.Diary;
 import cn.koala.home.model.User;
 import cn.koala.home.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -33,6 +35,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private DiaryMapper diaryMapper;
 
     /**
      * @Author: hanyaning
@@ -86,14 +90,17 @@ public class UserController {
      * @Description: 返回主页
      */
     @RequestMapping(value = "/toHome")
-    public String loginHomepage(@RequestParam String userName, ModelMap map) {
+    public String loginHomepage(@RequestParam String userName, ModelMap modelMap) {
         User user = null;
         if (StringUtils.isBlank(userName)) {
             user = userMapper.queryUserByUserName("guest");
         } else {
             user = userMapper.queryUserByUserName(userName);
         }
-        map.addAttribute("list", user);
+        Map<String,String> map = new HashMap();
+        List<Diary> dailyList = diaryMapper.getDiary(map);
+        modelMap.addAttribute("user", user);
+        modelMap.addAttribute("diaryList",dailyList);
         return "home";
     }
 

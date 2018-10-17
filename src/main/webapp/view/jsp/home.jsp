@@ -1,9 +1,20 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" %>
 <html>
 <head>
     <title>koala之家</title>
     <jsp:include page="alluse/autoImport.jsp"/>
     <link rel="stylesheet" type="text/css" href="/koala-home/static/css/homepage.css"/>
+    <script>
+        var innerHtmlDaily;
+        var user;
+        var diaryAraay;
+        $(function(){
+            user=${user};
+            diaryAraay=${diaryList};
+
+        })
+    </script>
 </head>
 <body>
 
@@ -13,10 +24,9 @@
         <div id="dongtai">
             <h4 class="biaoti">我的动态</h4>
             <ul>
-                <li>first one</li>
-                <li>second one</li>
-                <li>第三个</li>
-                <li>第四个哈哈</li>
+                <c:forEach begin="0" end="4" items="${diaryList}" var="diary">
+                    <li>${diary.diaryTitle}</li>
+                </c:forEach>
             </ul>
         </div>
         <img width="338" height="427" class="welcome" src="/koala-home/static/img/welcome_hua.png"/>

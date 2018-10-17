@@ -82,7 +82,9 @@
                     for (i = 0; i < maxRecord; i++) {
                         bookContent = bookList[i].bookContent;
                         userName = bookList[i].userName;
-                        writeTime = bookList[i].writeTime;
+                        var timeStr = bookList[i].writeTime;
+                        var date=new Date(timeStr);
+                        writeTime=dateFormatter("yyyy-MM-dd hh:mm:ss",date)
                         innerHtmlStr = innerHtmlStr + "<div class='book-group'> <div class='book-message'>" + bookContent + "</div> <div class='user-name'>" + userName + "</div> <div class='write-time'>" + writeTime + "</div></div>";
                     }
                     currectRecord = maxRecord;

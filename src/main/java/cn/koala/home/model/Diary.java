@@ -15,6 +15,21 @@ public class Diary {
     private String diaryContent;//
     private Date writeTime;
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"diaryId\":\"")
+                .append(diaryId).append('\"');
+        sb.append(",\"diaryTitle\":\"")
+                .append(diaryTitle).append('\"');
+        sb.append(",\"diaryContent\":\"")
+                .append(diaryContent).append('\"');
+        sb.append(",\"writeTime\":\"")
+                .append(writeTime).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
+
     public String getDiaryId() {
         return diaryId;
     }
