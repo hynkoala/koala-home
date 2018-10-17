@@ -5,6 +5,7 @@
         document.getElementById("to-myspace").href = "/koala-home/user/toMyspace?userName=" + userName;
         document.getElementById("to-visitor-book").href = "/koala-home/view/jsp/visitorBook.jsp?userName=" + userName;
         document.getElementById("to-diary").href = "/koala-home/view/jsp/diary.jsp?userName=" + userName;
+        document.getElementById("to-album").href = "/koala-home/view/jsp/album.jsp?userName=" + userName;
         document.getElementById("user-name").innerHTML = userName;
     }
 </script>
@@ -15,11 +16,9 @@
                 <ul>
                     <li width="32"><a id="to-home" title="首页" target="_self">首页</a></li>
                     <li width="30"><a href="#" id="to-diary" tilte="日志" target="_self">日志</a></li>
-                    <li width="30"><a href="#" title="我的相册" target="_self">相册</a></li>
+                    <li width="30"><a href="#" id="to-album" title="我的相册" target="_self">相册</a></li>
                     <li width="30"><a href="#" id="to-visitor-book" title="给我留言" target="_self">留言</a></li>
-                    <li width="50"><a href="#" title="联系我" target="_self">联系方式</a></li>
-                    <li width="50"><a href="#" title="我的简历" target="new">我的简历</a></li>
-                    <li width="50"><a id="to-myspace" title="个人中心" target="_self">欢迎您：<span id="user-name"></span></a>
+                    <li width="50"><a href="#" id="to-myspace" title="个人中心" target="_self">欢迎您：<span id="user-name"></span></a>
                     </li>
                     <li width="20" id="register-li"><a id="register-a" href="#" onclick="toRegister()">注册</a></li>
                     <li width="20" id="login-li"><a id="login-a" href="#" onclick="exitLogin()">退出</a></li>

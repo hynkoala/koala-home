@@ -9,9 +9,9 @@
         var innerHtmlDaily;
         var user;
         var diaryAraay;
-        $(function(){
-            user=${user};
-            diaryAraay=${diaryList};
+        $(function () {
+            user =${user};
+            diaryAraay =${diaryList};
 
         })
     </script>

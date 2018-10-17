@@ -97,10 +97,10 @@ public class UserController {
         } else {
             user = userMapper.queryUserByUserName(userName);
         }
-        Map<String,String> map = new HashMap();
+        Map<String, String> map = new HashMap();
         List<Diary> dailyList = diaryMapper.getDiary(map);
         modelMap.addAttribute("user", user);
-        modelMap.addAttribute("diaryList",dailyList);
+        modelMap.addAttribute("diaryList", dailyList);
         return "home";
     }
 

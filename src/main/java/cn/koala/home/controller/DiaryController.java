@@ -28,7 +28,7 @@ public class DiaryController {
     public List<Diary> DiaryController(@RequestParam(required = false) String inputData) {
 
         Map map = new HashMap<>();
-        map.put("inputData",inputData);
+        map.put("inputData", inputData);
         return diaryMapper.getDiary(map);
     }
 

@@ -7,7 +7,7 @@
 
     <display-name>Archetype Created Web Application</display-name>
     <welcome-file-list>
-        <welcome-file>view/jsp/home.jsp</welcome-file>
+        <welcome-file>/koala-home/user/toHome?userName=hynkoala</welcome-file>
         <welcome-file>view/jsp/register.jsp</welcome-file>
     </welcome-file-list>
 
@@ -77,7 +77,7 @@
         <url-pattern>*.jpg</url-pattern>
 
     </servlet-mapping>
-    <!-- ======================== 单点登录结束 ======================== -->
+    <!-- ======================== 单点登录开始 ======================== -->
     <!-- 用于单点退出，该过滤器用于实现单点登出功能，可选配置 -->
     <listener>
         <listener-class>org.jasig.cas.client.session.SingleSignOutHttpSessionListener</listener-class>

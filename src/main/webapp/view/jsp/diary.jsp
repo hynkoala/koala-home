@@ -5,14 +5,16 @@
     <title>日志</title>
     <jsp:include page="alluse/autoImport.jsp"/>
     <style>
-        #content{
-            padding:20px 50px;
+        #content {
+            padding: 20px 50px;
         }
-        input#diary-title{
-            width:400px;
+
+        input#diary-title {
+            width: 400px;
         }
-        textarea#diary-content{
-            height: 200px;
+
+        textarea#diary-content {
+            height: 260px;
         }
     </style>
     <script>
@@ -29,6 +31,7 @@
                 type: "post",
                 success: function (data) {
                     alert(data);
+                    window.location.reload();
                 },
                 error: function () {
                     alert("未知错误！");
