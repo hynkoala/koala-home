@@ -127,7 +127,7 @@
             if (visitorMessage != '' && visitorMessage != null && visitorMessage != 'undefined') {
                 var data = {userName: userName, visitorMessage: visitorMessage};
                 $.ajax({
-                    postType: 'post',
+                    type: 'post',
                     data: data,
                     url: homeUrl + "/visitorBook/saveMessage",
                     success: function (data) {

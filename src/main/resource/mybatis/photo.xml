@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.koala.home.mapper.PhotoMapper">
+    <resultMap id="photo" type="cn.koala.home.model.Photo">
+        <id property="photoId" column="photo_id" jdbcType="VARCHAR"/>
+        <result property="photoName" column="photo_name" jdbcType="VARCHAR"/>
+        <result property="photoNewName" column="photo_new_name" jdbcType="VARCHAR"/>
+        <result property="photoComment" column="photo_comment" jdbcType="VARCHAR"/>
+        <result property="photoPath" column="photo_path" jdbcType="VARCHAR"/>
+        <result property="uploadTime" column="uploadTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <insert id="savePhoto" parameterType="cn.koala.home.model.Photo">
+        insert INTO koala_album(photo_id,photo_comment,photo_name,photo_new_name,photo_path,upload_time)
+        VALUES
+        (#{photoId,jdbcType=VARCHAR},#{photoComment,jdbcType=VARCHAR},#{photoName,jdbcType=VARCHAR},#{photoNewName,jdbcType=VARCHAR},#{photoPath,jdbcType=VARCHAR},#{uploadTime,jdbcType=TIMESTAMP})
+    </insert>
+
+</mapper>
